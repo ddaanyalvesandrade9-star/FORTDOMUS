@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>const base = document.createElement("base"); base.href = location.protocol === "file:" ? "./" : "/"; document.head.append(base);</script>
+  <meta name="theme-color" content="#1a1a1a">
+  <meta name="description" content="Fort Domus: organização e praticidade para os seus equipamentos. Conheça nossos produtos.">
+  <title>Fort Domus | Ordem pra quem protege</title>
+  <link rel="icon" href="assets/fort-domus-logo.png" type="image/png">
+  <link rel="stylesheet" href="assets/site.css">
+  <script defer src="assets/supabase-config.js"></script>
+  <script defer src="assets/site.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="Fort Domus — página inicial">
+        <img src="assets/fort-domus-wordmark.png" alt="Fort Domus" width="594" height="300">
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+        <a href="/" aria-current="page">Inicial</a>
+        <a href="/produtos">Produtos</a>
+        <a href="/duvidas">Dúvidas</a>
+        <a href="/sobre-nos">Sobre nós</a>
+      </nav>
+      <div class="header-actions">
+        <button class="search-toggle" type="button" aria-label="Abrir busca no site" aria-controls="search-panel" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+        </button>
+        <a class="button header-cta" href="https://wa.me/5583987234968?text=Ol%C3%A1!%20Tenho%20interesse%20nos%20produtos%20da%20Fort%20Domus%20e%20gostaria%20de%20conhecer%20melhor%20as%20op%C3%A7%C3%B5es%20dispon%C3%ADveis%20e%20seus%20valores." target="_blank" rel="noopener noreferrer">TIRE SUA DÚVIDA!</a>
+        <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="main-nav" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+    <div class="search-panel" id="search-panel" aria-label="Busca no site">
+      <form id="site-search-form" role="search">
+        <input id="site-search-input" type="search" placeholder="O que você procura?" aria-label="Buscar no site" required>
+        <button class="button" type="submit">Buscar</button>
+      </form>
+      <p class="search-feedback" id="search-feedback" aria-live="polite"></p>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <video class="hero-background-video" autoplay muted loop playsinline preload="none" poster="assets/fort-domus-produto.jpg" aria-hidden="true" tabindex="-1">
+        <source data-src="assets/fort-domus-hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-backdrop-shade" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy" data-reveal>
+          <span class="eyebrow">@fortdomus</span>
+          <h1>Ordem pra<br><span>quem protege.</span></h1>
+          <p>Disciplina começa na organização. Um espaço dedicado para manter seu equipamento pronto e no lugar certo.</p>
+          <div class="hero-actions">
+            <a class="button" href="https://wa.me/5583987234968?text=Ol%C3%A1!%20Tenho%20interesse%20nos%20produtos%20da%20Fort%20Domus%20e%20gostaria%20de%20conhecer%20melhor%20as%20op%C3%A7%C3%B5es%20dispon%C3%ADveis%20e%20seus%20valores." target="_blank" rel="noopener noreferrer">TIRE SUA DÚVIDA! <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="/produtos/organizador">Conheça o produto <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-note">Organização para a rotina de quem protege</div>
+        </div>
+
+        <div class="video-frame" data-reveal>
+          <img class="hero-video" src="assets/fort-domus-produto.jpg" alt="Organizador Fort Domus com uniforme, colete, cinto, boné e coturnos" width="1300" height="1734" fetchpriority="high">
+          <div class="video-shade" aria-hidden="true"></div>
+          <div class="video-status">
+            <div>
+              <span class="eyebrow">Produto em destaque</span>
+              <strong>Organizador Fort Domus</strong>
+            </div>
+            <span class="status-tag">FORT DOMUS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section craftsmanship-section home-craftsmanship" id="qualidade">
+      <div class="container">
+        <div class="craftsmanship-intro">
+          <div class="craftsmanship-copy" data-reveal>
+            <span class="eyebrow">Construção e materiais</span>
+            <h2>Feito para durar.</h2>
+            <p>Muito mais que um organizador. Uma estrutura desenvolvida para acomodar seus equipamentos com resistência, praticidade e qualidade.</p>
+          </div>
+        </div>
+
+        <div class="material-grid">
+          <article class="material-card" data-reveal>
+            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe do aço galvanizado"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 12v40M29 12v40M17 20h12M17 44h12M38 16h10v32H38zM38 24h10M38 40h10"></path></svg><span>Foto real do aço em detalhe · em breve</span></div></figure>
+            <div class="material-card-copy"><h3>Aço galvanizado</h3><p>Toda a estrutura é fabricada em tubos de aço 20x20 mm e chapa de aço 18. O material galvanizado recebe uma camada de proteção de zinco, que ajuda a proteger o metal contra a corrosão e a ferrugem, aumentando sua durabilidade.</p></div>
+          </article>
+          <article class="material-card" data-reveal>
+            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe da pintura do organizador"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="m19 43 21-21 7 7-21 21-10 3zM36 26l7 7M43 13l1.5 4.5L49 19l-4.5 1.5L43 25l-1.5-4.5L37 19l4.5-1.5z"></path></svg><span>Foto real da pintura em detalhe · em breve</span></div></figure>
+            <div class="material-card-copy"><h3>Pintura de qualidade</h3><p>Acabamento cuidadosamente executado, que valoriza o visual do produto e proporciona uma camada adicional de proteção à estrutura metálica.</p></div>
+          </article>
+          <article class="material-card" data-reveal>
+            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe da madeira tratada"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 18h38v28H13zM18 25c7 5 15-5 28 1M18 34c8 5 15-4 28 1M18 41c8 4 15-3 28 1"></path></svg><span>Foto real da madeira em detalhe · em breve</span></div></figure>
+            <div class="material-card-copy"><h3>Madeira tratada</h3><p>Utilizamos madeira com aplicação de stain, um tratamento que ajuda a proteger a superfície contra a umidade e contribui para conservar sua aparência.</p></div>
+          </article>
+          <article class="material-card" data-reveal>
+            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real dos ganchos instalados no organizador"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 15v20a8 8 0 0 0 16 0V22a7 7 0 0 1 14 0v5M41 27h14M49 22v10M41 32l8 13 8-13"></path></svg><span>Foto real dos ganchos em detalhe · em breve</span></div></figure>
+            <div class="material-card-copy"><h3>Ganchos sob medida</h3><p>Cada equipamento precisa ter seu espaço. Por isso, desenvolvemos ganchos sob medida para proporcionar encaixe adequado e facilitar a organização dos seus equipamentos, sem improvisações.</p></div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="value-strip" role="region" aria-label="Benefícios e condições">
+      <div class="container value-list">
+        <div class="value-track">
+          <div class="value-group">
+            <div class="value-item">Mais organização</div>
+            <div class="value-item">Mais praticidade</div>
+            <div class="value-item">Mais proteção</div>
+            <div class="value-item">Em até 5x no cartão</div>
+            <div class="value-item">90 dias de garantia</div>
+          </div>
+          <div class="value-group" aria-hidden="true">
+            <div class="value-item">Mais organização</div>
+            <div class="value-item">Mais praticidade</div>
+            <div class="value-item">Mais proteção</div>
+            <div class="value-item">Em até 5x no cartão</div>
+            <div class="value-item">90 dias de garantia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="diferenciais">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <span class="eyebrow">Organização para a sua rotina</span>
+          <h2>Um lugar certo para o seu equipamento.</h2>
+          <p>Uma solução criada para manter seus materiais organizados, acomodados e prontos para a rotina.</p>
+        </div>
+        <div class="home-highlight-grid">
+          <article class="home-highlight" data-reveal>
+            <strong>Mais organização</strong>
+            <p>Um espaço dedicado para manter os equipamentos no lugar certo.</p>
+          </article>
+          <article class="home-highlight" data-reveal>
+            <strong>Mais praticidade</strong>
+            <p>Os materiais reunidos e acessíveis quando você precisar.</p>
+          </article>
+          <article class="home-highlight" data-reveal>
+            <strong>Mais cuidado</strong>
+            <p>Uma forma funcional de acomodar os equipamentos ao chegar em casa.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section">
+      <div class="container home-product">
+        <figure class="home-product-photo" data-reveal>
+          <img src="assets/fort-domus-produto.jpg" alt="Organizador Fort Domus com os equipamentos acomodados" width="1300" height="1734" loading="lazy">
+        </figure>
+        <div class="home-product-copy" data-reveal>
+          <span class="eyebrow">Produto em destaque</span>
+          <h2>Organizador Fort Domus</h2>
+          <p>Conheça o organizador vertical desenvolvido para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço.</p>
+          <a class="button" href="/produtos/organizador">Conhecer produto <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="investment-section product-price-section" aria-label="Preço e formas de pagamento do organizador Fort Domus">
+      <div class="container investment-panel product-price-panel" data-reveal>
+        <div class="product-price-details">
+          <span class="eyebrow">Condições de pagamento</span>
+          <div class="price">
+            <div class="price-cash">
+              <span class="price-label">NO PIX, DINHEIRO OU BOLETO</span>
+              <strong>R$ 599,90</strong>
+            </div>
+            <div class="price-card">
+              <span class="price-label">NO CARTÃO</span>
+              <strong>5x de R$ 129,98</strong>
+              <span>sem juros</span>
+              <small>Total de R$ 649,90</small>
+            </div>
+          </div>
+          <div class="delivery-note">
+            <p><strong>Entrega grátis em Campina Grande</strong></p>
+            <p>Demais localidades: frete e prazo sob consulta pelo WhatsApp.</p>
+          </div>
+        </div>
+        <a class="button" href="https://wa.me/5583987234968?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Organizador%20Fort%20Domus%20e%20gostaria%20de%20consultar%20as%20formas%20de%20pagamento." target="_blank" rel="noopener noreferrer">TIRE SUA DÚVIDA! <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="section reviews-section" id="avaliacoes" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <span class="eyebrow">Experiências reais</span>
+          <h2 id="reviews-title">Avaliações de clientes.</h2>
+          <p>Os espaços abaixo estão preparados para receber depoimentos e fotos reais. Nenhuma avaliação foi publicada ainda.</p>
+        </div>
+        <div class="review-summary" aria-label="Resumo das avaliações">
+          <div><span>Nota média</span><strong>— <span class="review-scale">/ 5</span></strong></div>
+          <div><span>Avaliações publicadas</span><strong>0</strong></div>
+          <div class="review-summary-stars" aria-label="Nota ainda não informada"><span aria-hidden="true">☆☆☆☆☆</span><small>Aguardando avaliações</small></div>
+        </div>
+        <div class="review-carousel" data-review-carousel aria-label="Depoimentos de clientes">
+          <div class="review-viewport">
+            <div class="review-track" data-review-track>
+              <div class="review-page" data-review-page aria-label="Espaços para avaliações 1 a 3">
+                <article class="review-card">
+                  <div class="review-customer"><div class="review-avatar" role="img" aria-label="Espaço reservado para foto do cliente"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="8"></circle><path d="M8 43c1-9 7-14 16-14s15 5 16 14"></path></svg><span>Foto do cliente</span></div><div><h3>Nome do cliente</h3><span>Identificação do cliente</span></div></div>
+                  <div class="review-stars" aria-label="Nota do cliente ainda não informada"><span aria-hidden="true">☆☆☆☆☆</span><small>Nota a preencher</small></div>
+                  <p>Espaço reservado para o comentário real do cliente.</p>
+                </article>
+                <article class="review-card">
+                  <div class="review-customer"><div class="review-avatar" role="img" aria-label="Espaço reservado para foto do cliente"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="8"></circle><path d="M8 43c1-9 7-14 16-14s15 5 16 14"></path></svg><span>Foto do cliente</span></div><div><h3>Nome do cliente</h3><span>Identificação do cliente</span></div></div>
+                  <div class="review-stars" aria-label="Nota do cliente ainda não informada"><span aria-hidden="true">☆☆☆☆☆</span><small>Nota a preencher</small></div>
+                  <p>Espaço reservado para o comentário real do cliente.</p>
+                </article>
+                <article class="review-card">
+                  <div class="review-customer"><div class="review-avatar" role="img" aria-label="Espaço reservado para foto do cliente"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="8"></circle><path d="M8 43c1-9 7-14 16-14s15 5 16 14"></path></svg><span>Foto do cliente</span></div><div><h3>Nome do cliente</h3><span>Identificação do cliente</span></div></div>
+                  <div class="review-stars" aria-label="Nota do cliente ainda não informada"><span aria-hidden="true">☆☆☆☆☆</span><small>Nota a preencher</small></div>
+                  <p>Espaço reservado para o comentário real do cliente.</p>
+                </article>
+              </div>
+              <div class="review-page" data-review-page aria-label="Espaços para avaliações 4 a 6">
+                <article class="review-card">
+                  <div class="review-customer"><div class="review-avatar" role="img" aria-label="Espaço reservado para foto do cliente"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="8"></circle><path d="M8 43c1-9 7-14 16-14s15 5 16 14"></path></svg><span>Foto do cliente</span></div><div><h3>Nome do cliente</h3><span>Identificação do cliente</span></div></div>
+                  <div class="review-stars" aria-label="Nota do cliente ainda não informada"><span aria-hidden="true">☆☆☆☆☆</span><small>Nota a preencher</small></div>
+                  <p>Espaço reservado para o comentário real do cliente.</p>
+                </article>
+                <article class="review-card">
+                  <div class="review-customer"><div class="review-avatar" role="img" aria-label="Espaço reservado para foto do cliente"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="8"></circle><path d="M8 43c1-9 7-14 16-14s15 5 16 14"></path></svg><span>Foto do cliente</span></div><div><h3>Nome do cliente</h3><span>Identificação do cliente</span></div></div>
+                  <div class="review-stars" aria-label="Nota do cliente ainda não informada"><span aria-hidden="true">☆☆☆☆☆</span><small>Nota a preencher</small></div>
+                  <p>Espaço reservado para o comentário real do cliente.</p>
+                </article>
+                <article class="review-card">
+                  <div class="review-customer"><div class="review-avatar" role="img" aria-label="Espaço reservado para foto do cliente"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="17" r="8"></circle><path d="M8 43c1-9 7-14 16-14s15 5 16 14"></path></svg><span>Foto do cliente</span></div><div><h3>Nome do cliente</h3><span>Identificação do cliente</span></div></div>
+                  <div class="review-stars" aria-label="Nota do cliente ainda não informada"><span aria-hidden="true">☆☆☆☆☆</span><small>Nota a preencher</small></div>
+                  <p>Espaço reservado para o comentário real do cliente.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="review-controls">
+            <button type="button" data-review-action="previous" aria-label="Ver avaliações anteriores" disabled>‹</button>
+            <span data-review-count aria-live="polite">1 / 2</span>
+            <button type="button" data-review-action="next" aria-label="Ver próximas avaliações">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="institutional-callout" id="caderno">
+      <div class="container" data-reveal>
+        <span class="eyebrow">Fort Domus</span>
+        <h2>Uma rotina mais organizada começa em casa.</h2>
+        <p>Conheça a história por trás de uma solução pensada para o fim do plantão.</p>
+        <a class="button button-secondary" href="/sobre-nos">Leia a história da Fort Domus <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="section newsletter-section lead-signup-section" aria-labelledby="lead-signup-title">
+      <div class="container lead-signup-inner">
+        <div class="lead-signup-copy" data-reveal>
+          <span class="eyebrow">Novidades Fort Domus</span>
+          <h2 id="lead-signup-title">Receba novidades da Fort Domus</h2>
+          <p>Cadastre seu contato para receber informações sobre disponibilidade, produtos e novidades diretamente pelo WhatsApp.</p>
+        </div>
+        <form class="lead-form" id="lead-form" data-consent-version="consent-v1" data-reveal novalidate>
+          <div class="lead-field">
+            <label for="lead-name">Nome completo</label>
+            <input id="lead-name" name="nome" type="text" autocomplete="name" maxlength="120" required aria-describedby="lead-name-error">
+            <small class="lead-field-error" id="lead-name-error"></small>
+          </div>
+          <div class="lead-field">
+            <label for="lead-whatsapp">Número de WhatsApp com DDD</label>
+            <input id="lead-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(83) 99999-9999" maxlength="15" required aria-describedby="lead-whatsapp-error">
+            <small class="lead-field-error" id="lead-whatsapp-error"></small>
+          </div>
+          <label class="lead-consent" for="lead-consent">
+            <input id="lead-consent" name="autorizacao_contato" type="checkbox" required aria-describedby="lead-consent-error">
+            <span>Autorizo a Fort Domus a entrar em contato comigo pelo WhatsApp para enviar informações sobre produtos, disponibilidade e novidades. Sei que posso cancelar essa autorização a qualquer momento.</span>
+          </label>
+          <small class="lead-field-error" id="lead-consent-error"></small>
+          <div class="lead-captcha" id="lead-captcha" aria-label="Verificação antirobô"></div>
+          <small class="lead-field-error" id="lead-captcha-error" aria-live="polite"></small>
+          <button class="button lead-submit" type="submit">QUERO RECEBER NOVIDADES</button>
+          <p class="lead-privacy-note">Ao se cadastrar, você declara que leu nossa <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
+          <p class="lead-feedback" id="lead-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a class="footer-logo" href="/" aria-label="Fort Domus — página inicial"><img src="assets/fort-domus-wordmark-footer.png" alt="Fort Domus" width="594" height="300" loading="lazy"></a>
+        <span>ORDEM PRA QUEM PROTEGE.</span>
+        <nav class="footer-socials" aria-label="Redes sociais oficiais">
+          <a href="https://www.instagram.com/fortdomus/" target="_blank" rel="noopener noreferrer" aria-label="Instagram Fort Domus"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="18" cy="6" r="1" class="social-icon-fill"></circle></svg></a>
+          <a href="https://www.tiktok.com/@fort.domus" target="_blank" rel="noopener noreferrer" aria-label="TikTok Fort Domus"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.2a4.2 4.2 0 1 1-3.1-4.1v3.2a1.2 1.2 0 1 0 .1.5V3h3c.4 2.4 1.8 4 4 4.5v3.1A8 8 0 0 1 14 8.8"></path></svg></a>
+        </nav>
+      </div>
+      <details class="footer-group" open>
+        <summary>Atendimento</summary>
+        <div class="footer-links">
+          <a href="https://wa.me/5583987234968" target="_blank" rel="noopener noreferrer">Fale pelo WhatsApp ↗</a>
+          <a href="mailto:fortdomus@gmail.com">fortdomus@gmail.com</a>
+          <a href="/duvidas">Dúvidas frequentes</a>
+        </div>
+      </details>
+      <details class="footer-group" open>
+        <summary>Parcerias</summary>
+        <div class="footer-links">
+          <a href="mailto:fortdomus@gmail.com?subject=Parceria%20Fort%20Domus">Propostas de parceria</a>
+          <a href="https://wa.me/5583987234968?text=Ol%C3%A1!%20Gostaria%20de%20conversar%20sobre%20uma%20parceria%20com%20a%20Fort%20Domus." target="_blank" rel="noopener noreferrer">Fale com nossa equipe ↗</a>
+        </div>
+      </details>
+      <details class="footer-group" open>
+        <summary>Sobre</summary>
+        <div class="footer-links">
+          <a href="/sobre-nos">Quem somos</a>
+          <a href="/produtos">Produtos</a>
+          <a href="/produtos/organizador">Organizador Fort Domus</a>
+          <span>Pagamento via Pix e cartão de crédito</span>
+        </div>
+      </details>
+      <details class="footer-group" open>
+        <summary>POLÍTICAS E TERMOS</summary>
+        <div class="footer-links">
+          <a href="/politica-de-privacidade">Política de Privacidade</a>
+          <a href="/politica-de-devolucao-e-reembolso">Devolução e Reembolso</a>
+          <a href="/politica-de-frete">Política de Frete</a>
+          <a href="/politica-de-pos-venda">Pós-venda e Garantia</a>
+          <a href="/politica-de-cookies">Política de Cookies</a>
+          <a href="/termos-de-uso">Termos de Uso</a>
+        </div>
+      </details>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="current-year"></span> Fort Domus. Todos os direitos reservados.</span>
+      <a href="mailto:fortdomus@gmail.com">Entre em contato</a>
+    </div>
+  </footer>
+
+  <nav class="mobile-nav" aria-label="Navegação rápida">
+    <a href="/" aria-current="page"><span>Inicial</span></a>
+    <a href="/produtos"><span>Produtos</span></a>
+    <a href="/duvidas"><span>Dúvidas</span></a>
+    <a href="/sobre-nos"><span>Sobre nós</span></a>
+  </nav>
+</body>
+</html>

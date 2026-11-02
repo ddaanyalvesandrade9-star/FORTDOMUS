@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../ASIMOV/artools/assets"
+		},
+		{
+			"path": "../ASIMOV/artools/templates"
+		},
+		{
+			"path": "../ASIMOV/artools/.git"
+		}
+	]
+}

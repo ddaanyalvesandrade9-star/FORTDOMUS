@@ -1,0 +1,82 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'sha256-CJztG9Mx8Viy9CjdVQbWZChHJImD6oy0dbcqeAEBzis=' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; media-src 'self'; connect-src 'self' https://dcgjpknwhociepmakuyz.supabase.co https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/produtos",
+      "destination": "/produtos.html"
+    },
+    {
+      "source": "/produtos/organizador",
+      "destination": "/produto-organizador.html"
+    },
+    {
+      "source": "/duvidas",
+      "destination": "/duvidas.html"
+    },
+    {
+      "source": "/sobre-nos",
+      "destination": "/sobre-nos.html"
+    },
+    {
+      "source": "/politica-de-privacidade",
+      "destination": "/politica-de-privacidade.html"
+    },
+    {
+      "source": "/politica-de-devolucao-e-reembolso",
+      "destination": "/politica-de-devolucao-e-reembolso.html"
+    },
+    {
+      "source": "/politica-de-frete",
+      "destination": "/politica-de-frete.html"
+    },
+    {
+      "source": "/politica-de-pos-venda",
+      "destination": "/politica-de-pos-venda.html"
+    },
+    {
+      "source": "/politica-de-cookies",
+      "destination": "/politica-de-cookies.html"
+    },
+    {
+      "source": "/termos-de-uso",
+      "destination": "/termos-de-uso.html"
+    }
+  ]
+}

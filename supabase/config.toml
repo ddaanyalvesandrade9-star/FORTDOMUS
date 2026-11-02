@@ -1,0 +1,5 @@
+[functions.submit-lead]
+verify_jwt = false
+
+[functions.confirm-lead]
+verify_jwt = false
