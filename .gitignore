@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.vercel/
+node_modules/
+supabase/.temp/
+*.log
+*.zip
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+/REVISÃO/
+/assets.code-workspace
+/design-system.html
+/design_system4.html

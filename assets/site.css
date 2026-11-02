@@ -184,7 +184,7 @@
       background: var(--surface);
     }
     .hero-background-video { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-    .hero-backdrop-shade { position: absolute; z-index: 1; inset: 0; background: #ffffffa6; pointer-events: none; }
+    .hero-backdrop-shade { position: absolute; z-index: 1; inset: 0; background: #ffffff59; pointer-events: none; }
     .hero::after {
       position: absolute;
       z-index: 2;
@@ -207,11 +207,13 @@
       text-transform: uppercase;
     }
     .hero-copy h1 span { color: var(--silver); }
-    .hero-copy > p { max-width: 440px; margin: 0; color: #c4c4c4; font-size: clamp(1rem, 1.5vw, 1.16rem); line-height: 1.7; }
+    .hero-copy p { max-width: 440px; margin: 0; color: #c4c4c4; font-size: clamp(1rem, 1.5vw, 1.16rem); line-height: 1.7; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
     .hero-note { display: flex; align-items: center; gap: 12px; margin-top: 42px; color: var(--muted); font: .7rem "Courier New", monospace; letter-spacing: .1em; text-transform: uppercase; }
     .hero-note::before { width: 34px; height: 1px; background: var(--olive-hover); content: ""; }
-    .hero-copy .eyebrow, .hero-copy h1, .hero-copy h1 span, .hero-copy > p, .hero-copy .hero-note { color: #000; }
+    .hero-video-play { margin-top: 16px; }
+    .hero-video-play[hidden] { display: none; }
+    .hero-copy .eyebrow, .hero-copy h1, .hero-copy h1 span, .hero-copy .hero-copy-content > p, .hero-copy .hero-note { color: #000; }
     .hero-copy .eyebrow::before, .hero-copy .hero-note::before { background: #000; }
     .hero-actions .button-secondary { border-color: #000; background: #ffffffc7; color: #000; }
     .hero-actions .button-secondary:hover { border-color: #000; background: #fff; }
@@ -705,6 +707,8 @@
     }
     @media (max-width: 820px) {
       .container { width: min(var(--content), calc(100% - 36px)); }
+      .hero-background-video { object-position: center 42%; }
+      .hero-backdrop-shade { background: #ffffff2e; }
       .header-inner { min-height: 72px; }
       .brand img { width: 122px; }
       .header-cta { display: none; }
@@ -854,8 +858,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .hero-background-video { display: none; }
-      .hero { background: linear-gradient(#ffffffa6, #ffffffa6), url("../assets/fort-domus-produto.jpg") center 42% / cover, var(--surface); }
+      .hero { background: linear-gradient(#ffffff59, #ffffff59), url("../assets/fort-domus-produto.jpg") center 42% / cover, var(--surface); }
       [data-reveal] { opacity: 1; transform: none; }
       html.motion-ready [data-reveal] { animation: none; }
       .scroll-progress-dots button::before { transition: none; }

@@ -54,13 +54,16 @@ backend/migrações em `supabase/`, documentação em `docs/` e recursos web em
 
 As páginas ativas usam uma folha CSS e um script compartilhados; as páginas que
 capturam leads carregam adicionalmente a configuração pública e o captcha sob
-demanda. O vídeo local tem aproximadamente 5,4 MB; seu carregamento é adiado
-até depois do evento `load` e de um período ocioso do navegador, e ele não é
-carregado quando a pessoa prefere movimento reduzido ou economia de dados. A
-imagem principal tem dimensões explícitas e prioridade alta, enquanto imagens
-abaixo do hero usam carregamento diferido. Logotipos repetidos dentro de
-`REVISÃO/` são idênticos aos ativos ativos, mas foram mantidos para preservar o
-snapshot.
+demanda. O vídeo principal tem aproximadamente 5,4 MB, usa `preload="auto"` e
+preenche o fundo do hero com corte proporcional também em telas móveis, com
+menos sobreposição branca para manter o movimento visível. O script
+reafirma `muted` e `playsInline`, tenta reproduzir após o carregamento e ao
+retornar à página, e oferece o botão de reprodução se o navegador bloquear,
+falhar ao carregar ou não iniciar o vídeo em até seis segundos. O pôster
+permanece como alternativa visual. A imagem
+principal tem dimensões explícitas e prioridade alta, enquanto imagens abaixo do
+hero usam carregamento diferido. Logotipos repetidos dentro de `REVISÃO/` são idênticos
+aos ativos ativos, mas foram mantidos para preservar o snapshot.
 
 ## Restrições de publicação
 

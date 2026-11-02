@@ -1,0 +1,14 @@
+# Internal backend source, migrations, and setup documentation
+/supabase/
+/docs/
+/README.md
+/design-system.html
+/design_system4.html
+/.env*
+/**/*.env
+
+# Local review snapshots and source archives are not site content
+/REVISÃO/
+/**/*.zip
+/*.zip
+/*.code-workspace
