@@ -20,6 +20,8 @@ if (heroVideo && heroVideoPlayButton) {
   const startVideoPlayback = () => {
     heroVideo.play().catch(revealVideoPlayButton);
   };
+  heroVideo.autoplay = true;
+  heroVideo.loop = true;
   heroVideo.muted = true;
   heroVideo.defaultMuted = true;
   heroVideo.playsInline = true;
@@ -29,6 +31,7 @@ if (heroVideo && heroVideoPlayButton) {
       revealVideoPlayButton();
     }
   }, 6000);
+  heroVideo.addEventListener("loadeddata", attemptVideoPlayback);
   heroVideo.addEventListener("canplay", attemptVideoPlayback);
   heroVideo.addEventListener("error", revealVideoPlayButton);
   heroVideo.addEventListener("pause", () => {
