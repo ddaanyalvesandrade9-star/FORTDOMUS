@@ -714,7 +714,7 @@
       .hero::after { opacity: 0; }
       .hero.is-video-playing::after { opacity: .4; }
       .hero-backdrop-shade { background: #ffffff2e; }
-      .hero-video-play { width: 100%; }
+      .hero-video-play { width: 100%; color: #000; }
       .hero-video-play-mobile-label { display: inline; }
       .hero-video-play-desktop-label { display: none; }
       .header-inner { min-height: 72px; }
