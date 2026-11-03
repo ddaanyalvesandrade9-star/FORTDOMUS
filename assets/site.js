@@ -20,11 +20,13 @@ if (heroVideo && heroVideoPlayButton) {
   const startVideoPlayback = () => {
     heroVideo.play().catch(revealVideoPlayButton);
   };
+  const heroSection = heroVideo.closest(".hero");
   heroVideo.autoplay = true;
   heroVideo.loop = true;
   heroVideo.muted = true;
   heroVideo.defaultMuted = true;
   heroVideo.playsInline = true;
+  if (window.matchMedia("(max-width: 820px)").matches) revealVideoPlayButton();
   attemptVideoPlayback();
   playbackTimeout = window.setTimeout(() => {
     if (heroVideo.paused || heroVideo.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
@@ -43,7 +45,10 @@ if (heroVideo && heroVideoPlayButton) {
     if (!document.hidden) attemptVideoPlayback();
   });
   heroVideoPlayButton.addEventListener("click", startVideoPlayback);
-  heroVideo.addEventListener("playing", hideVideoPlayButton);
+  heroVideo.addEventListener("playing", () => {
+    heroSection?.classList.add("is-video-playing");
+    hideVideoPlayButton();
+  });
 }
 
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
