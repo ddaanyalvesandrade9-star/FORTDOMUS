@@ -13,3 +13,5 @@ Thumbs.db
 /assets.code-workspace
 /design-system.html
 /design_system4.html
+.vercel
+.env*

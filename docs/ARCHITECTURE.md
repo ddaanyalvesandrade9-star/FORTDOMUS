@@ -38,12 +38,12 @@ backend/migrações em `supabase/`, documentação em `docs/` e recursos web em
 ## Páginas e responsabilidades
 
 - `index.html` é a home ativa. `index(1).html` é mantida como cópia local
-  compatível com o histórico do projeto; ambas carregam os mesmos recursos.
+  compatível com o histórico do projeto; ambas carregam os mesmos recursos. `index(1).html` é idêntica a `index.html` e é excluída da publicação por `.vercelignore`.
 - `produto-organizador.html`, `produtos.html`, `duvidas.html` e `sobre-nos.html`
   cobrem produto, catálogo, suporte e conteúdo institucional.
 - As políticas legais e `termos-de-uso.html` permanecem na raiz para preservar
   as URLs públicas.
-- `confirmar-whatsapp.html` apresenta o passo explícito de confirmação.
+- `confirmar-whatsapp.html` e `assets/confirm-lead.js` pertencem ao fluxo antigo de confirmação por WhatsApp (funções `submit-lead` e `confirm-lead`, não publicadas). Permanecem no projeto, mas são excluídas da publicação por `.vercelignore`; o cadastro atual usa `submit-novidades`, sem confirmação.
 - `design-system.html` e `design_system4.html` são artefatos HTML existentes e
   não foram removidos nem movidos. São excluídos do deploy por serem páginas de
   referência não ligadas ao site e dependerem de recursos locais ausentes.
@@ -71,3 +71,16 @@ O diretório de publicação não foi alterado. `.vercelignore` exclui backend,
 SQL, documentação, arquivos ZIP e snapshots da revisão do site estático; o
 Supabase CLI continua lendo `supabase/` do workspace. URLs limpas mantêm seus
 destinos em `vercel.json`.
+
+## Catálogo de produtos
+
+- `assets/products-data.js` é a única fonte de dados (nome, fotos, vídeos,
+  descrição, características, especificações, dimensões, material, diferenciais
+  e preço). Instruções de preenchimento estão no topo do arquivo.
+- `assets/products.js` gera os cards de `produtos.html` e a página
+  `produto.html`, que atende `/produtos/<slug>` (rewrite `/produtos/:slug`).
+  Em `file://` a página abre como `produto.html?produto=<slug>`.
+- Mídia de cada produto: `assets/products/<slug>/`. Vídeos MP4 tocam no próprio
+  site (a CSP só permite `media-src 'self'`; incorporar YouTube/Vimeo exigiria
+  ajustar `frame-src`).
+- `/produtos/organizador` (`produto-organizador.html`) foi mantida intacta.

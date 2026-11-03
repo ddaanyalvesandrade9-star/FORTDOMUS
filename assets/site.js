@@ -79,7 +79,8 @@ if (isLocalFile) {
     const match = href.match(/^\/([^?#]*)([?#].*)?$/);
     if (!match) return;
     const pathname = `/${match[1]}`.replace(/\/$/, "") || "/";
-    const localPage = localPages.get(pathname);
+    const productSlug = pathname.match(/^\/produtos\/([^/]+)$/)?.[1];
+    const localPage = localPages.get(pathname) || (productSlug && `produto.html?produto=${productSlug}`);
     if (localPage) link.setAttribute("href", `${localPage}${match[2] || ""}`);
   });
 }
@@ -149,12 +150,12 @@ if (leadForm) {
   const nameInput = leadForm.querySelector("#lead-name");
   const whatsappInput = leadForm.querySelector("#lead-whatsapp");
   const consentInput = leadForm.querySelector("#lead-consent");
+  const honeypotInput = leadForm.querySelector("#lead-website");
   const submitButton = leadForm.querySelector(".lead-submit");
   const feedback = leadForm.querySelector("#lead-feedback");
   const captchaContainer = leadForm.querySelector("#lead-captcha");
   const captchaError = leadForm.querySelector("#lead-captcha-error");
   const defaultButtonText = submitButton.textContent;
-  const consentVersion = leadForm.dataset.consentVersion;
   const validDdds = new Set([
     "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28",
     "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47",
@@ -162,6 +163,16 @@ if (leadForm) {
     "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87",
     "88", "89", "91", "92", "93", "94", "95", "96", "97", "98", "99",
   ]);
+  const SUCCESS_MESSAGE = "Cadastro realizado com sucesso! Em breve, a Fort Domus poderá entrar em contato com você pelo WhatsApp.";
+  const ERROR_MESSAGE = "Não foi possível realizar seu cadastro. Verifique seus dados e tente novamente.";
+  // Falha de conexão ou tempo esgotado (sem resposta do servidor).
+  const NETWORK_ERROR_MESSAGE = "Não foi possível enviar seus dados agora. Verifique sua conexão e tente novamente.";
+  // Mensagens por código HTTP da Edge Function; qualquer outro caso usa a mensagem genérica acima.
+  const HTTP_ERROR_MESSAGES = {
+    400: "Verifique seus dados e tente novamente.",
+    429: "Muitas tentativas em pouco tempo. Aguarde alguns minutos antes de tentar novamente.",
+    503: "Nosso serviço está temporariamente indisponível. Tente novamente mais tarde.",
+  };
   let isSubmitting = false;
   let captchaToken = "";
   let captchaWidgetId = null;
@@ -185,70 +196,74 @@ if (leadForm) {
     return `(${digits.slice(0, 2)}) ${subscriber.slice(0, splitAt)}-${subscriber.slice(splitAt)}`;
   }
 
-  function setLeadFeedback(message, state, withWhatsAppLink = false) {
-    feedback.replaceChildren(document.createTextNode(message));
+  // Aceita DDD + número (com ou sem 55) e devolve DDD + número sem o 55 (formato de public.leads), ou null.
+  function normalizeBrazilianWhatsapp(value) {
+    let digits = value.replace(/\D/g, "");
+    if ((digits.length === 12 || digits.length === 13) && digits.startsWith("55")) digits = digits.slice(2);
+    const subscriber = digits.slice(2);
+    const valid = validDdds.has(digits.slice(0, 2))
+      && ((subscriber.length === 8 && /^[2-5]\d{7}$/.test(subscriber))
+        || (subscriber.length === 9 && /^9\d{8}$/.test(subscriber)));
+    return valid ? digits : null;
+  }
+
+  function setLeadFeedback(message, state) {
+    feedback.textContent = message;
     feedback.dataset.state = state;
-    if (withWhatsAppLink) {
-      feedback.append(" ");
-      const link = document.createElement("a");
-      link.href = "https://wa.me/5583987234968";
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = "Fale pelo WhatsApp.";
-      feedback.append(link);
+  }
+
+  function setSubmitting(active) {
+    isSubmitting = active;
+    submitButton.disabled = active;
+    submitButton.setAttribute("aria-busy", String(active));
+    if (active) {
+      const spinner = document.createElement("span");
+      spinner.className = "lead-spinner";
+      spinner.setAttribute("aria-hidden", "true");
+      submitButton.replaceChildren(spinner, document.createTextNode("Enviando..."));
+    } else {
+      submitButton.textContent = defaultButtonText;
     }
   }
 
-  function setCaptchaReady(token) {
+  function setCaptchaToken(token) {
     captchaToken = token;
-    captchaError.textContent = "";
-    submitButton.disabled = !captchaToken || isSubmitting;
+    if (token) captchaError.textContent = "";
   }
 
   function resetCaptcha() {
     captchaToken = "";
-    submitButton.disabled = true;
     if (captchaWidgetId !== null) window.turnstile?.reset(captchaWidgetId);
   }
 
-  function renderCaptcha() {
-    if (!window.turnstile || captchaWidgetId !== null) return;
-    captchaWidgetId = window.turnstile.render(captchaContainer, {
-      sitekey: turnstileSiteKey,
-      action: "lead_signup",
-      callback: (token) => setCaptchaReady(token),
-      "expired-callback": () => setCaptchaReady(""),
-      "error-callback": () => {
-        setCaptchaReady("");
-        captchaError.textContent = "Não foi possível validar a proteção antirobô. Tente novamente.";
-      },
-    });
-  }
-
+  // O CAPTCHA só é exigido quando há uma chave de site configurada; sem ela
+  // o formulário continua funcionando (a Edge Function aplica rate limit).
   function initializeCaptcha() {
-    if (!supabaseUrl || !publishableKey || !turnstileSiteKey) {
-      submitButton.disabled = true;
-      setLeadFeedback(
-        "O cadastro online ainda não está disponível. A proteção antirobô precisa ser configurada.",
-        "error",
-        true,
-      );
-      return;
-    }
-
+    if (!turnstileSiteKey) return;
+    const render = () => {
+      if (!window.turnstile || captchaWidgetId !== null) return;
+      captchaWidgetId = window.turnstile.render(captchaContainer, {
+        sitekey: turnstileSiteKey,
+        action: "lead_signup",
+        callback: setCaptchaToken,
+        "expired-callback": () => setCaptchaToken(""),
+        "error-callback": () => {
+          setCaptchaToken("");
+          captchaError.textContent = "Não foi possível validar a proteção antirobô. Tente novamente.";
+        },
+      });
+    };
     if (window.turnstile) {
-      renderCaptcha();
+      render();
       return;
     }
-
     const script = document.createElement("script");
     script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
     script.async = true;
     script.defer = true;
-    script.onload = renderCaptcha;
+    script.onload = render;
     script.onerror = () => {
-      submitButton.disabled = true;
-      setLeadFeedback("A proteção antirobô não carregou. Tente novamente mais tarde.", "error");
+      captchaError.textContent = "A proteção antirobô não carregou. Recarregue a página e tente novamente.";
     };
     document.head.append(script);
   }
@@ -266,32 +281,34 @@ if (leadForm) {
     if (isSubmitting) return;
 
     const nome = nameInput.value.trim().replace(/\s+/g, " ");
-    const whatsapp = whatsappInput.value.replace(/\D/g, "");
-    const ddd = whatsapp.slice(0, 2);
-    const subscriber = whatsapp.slice(2);
+    const whatsapp = normalizeBrazilianWhatsapp(whatsappInput.value);
     const validName = nome.length >= 3 && nome.length <= 120 && /^\p{L}[\p{L}'’.-]*(?:\s+\p{L}[\p{L}'’.-]*)+$/u.test(nome);
-    const validPhone = validDdds.has(ddd)
-      && ((subscriber.length === 8 && /^[2-5]\d{7}$/.test(subscriber))
-        || (subscriber.length === 9 && /^9\d{8}$/.test(subscriber)));
 
     setFieldError(nameInput, validName ? "" : "Informe seu nome completo.");
-    setFieldError(whatsappInput, validPhone ? "" : "Informe um número válido com DDD.");
+    setFieldError(whatsappInput, whatsapp ? "" : "Informe um número válido com DDD.");
     setFieldError(consentInput, consentInput.checked ? "" : "Marque a autorização para continuar.");
-    if (!validName || !validPhone || !consentInput.checked || !captchaToken) {
+    const needsCaptcha = Boolean(turnstileSiteKey) && !captchaToken;
+    if (needsCaptcha) captchaError.textContent = "Conclua a verificação antirobô.";
+    if (!validName || !whatsapp || !consentInput.checked || needsCaptcha) {
       setLeadFeedback("Revise os campos indicados antes de enviar.", "error");
-      if (!captchaToken) captchaError.textContent = "Conclua a verificação antirobô.";
       leadForm.querySelector('[aria-invalid="true"]')?.focus();
       return;
     }
+    if (!supabaseUrl || !publishableKey) {
+      console.error("Configuração do Supabase ausente em assets/supabase-config.js.");
+      setLeadFeedback(ERROR_MESSAGE, "error");
+      return;
+    }
 
-    isSubmitting = true;
-    submitButton.disabled = true;
-    submitButton.textContent = "ENVIANDO...";
+    setSubmitting(true);
     setLeadFeedback("Enviando seu cadastro...", "pending");
 
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
     try {
-      const response = await fetch(`${supabaseUrl}/functions/v1/submit-lead`, {
+      const response = await fetch(`${supabaseUrl}/functions/v1/submit-novidades`, {
         method: "POST",
+        signal: controller.signal,
         headers: {
           apikey: publishableKey,
           "Content-Type": "application/json",
@@ -300,35 +317,28 @@ if (leadForm) {
           nome,
           whatsapp,
           autorizacaoContato: consentInput.checked,
-          consentVersion,
+          website: honeypotInput?.value ?? "",
           captchaToken,
         }),
       });
+      const result = await response.json().catch(() => null);
 
-      if (!response.ok) {
-        console.error("A Edge Function de cadastro de leads recusou a solicitação.", response.status);
-        setLeadFeedback(
-          "Não foi possível processar o pedido agora. Confira a verificação e tente novamente mais tarde.",
-          "error",
-        );
+      // Sucesso somente com confirmação explícita de que o registro foi gravado.
+      if (!response.ok || result?.ok !== true) {
+        console.error("O cadastro de novidades foi recusado pelo servidor.", response.status);
+        setLeadFeedback(response.ok ? ERROR_MESSAGE : (HTTP_ERROR_MESSAGES[response.status] ?? ERROR_MESSAGE), "error");
         return;
       }
 
       leadForm.reset();
-      setLeadFeedback(
-        "Recebemos sua solicitação. Se a mensagem for entregue ao número informado, abra o link no WhatsApp e confirme a autorização. Só enviaremos novidades após essa confirmação.",
-        "success",
-      );
+      setLeadFeedback(SUCCESS_MESSAGE, "success");
     } catch (error) {
-      console.error("Erro de comunicação com a Edge Function de leads.", error);
-      setLeadFeedback(
-        "Não foi possível processar o pedido agora. Tente novamente mais tarde.",
-        "error",
-      );
+      console.error("Erro de comunicação com o servidor de cadastro.", error);
+      setLeadFeedback(NETWORK_ERROR_MESSAGE, "error");
     } finally {
-      isSubmitting = false;
+      window.clearTimeout(timeout);
+      setSubmitting(false);
       resetCaptcha();
-      submitButton.textContent = defaultButtonText;
     }
   });
 }
@@ -442,7 +452,8 @@ if (lightbox) {
     const trigger = event.target.closest("[data-gallery]");
     if (!trigger || !lightbox) return;
     event.preventDefault();
-    galleryImages = [...new Map([...document.querySelectorAll("[data-gallery] img")].map((image) => [image.currentSrc || image.src, image])).values()];
+    const gallerySelector = trigger.dataset.gallerySource || "[data-gallery] img";
+    galleryImages = [...new Map([...document.querySelectorAll(gallerySelector)].map((image) => [image.currentSrc || image.src, image])).values()];
     const selectedImage = trigger.querySelector("img");
     const selectedImageSrc = selectedImage.currentSrc || selectedImage.src;
     activeImageIndex = galleryImages.findIndex((image) => (image.currentSrc || image.src) === selectedImageSrc);

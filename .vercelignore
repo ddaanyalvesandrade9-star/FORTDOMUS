@@ -12,3 +12,10 @@
 /**/*.zip
 /*.zip
 /*.code-workspace
+
+# Cópia idêntica da home e arquivos do fluxo antigo de confirmação por WhatsApp.
+# Não são usados pelas rotas atuais (as funções submit-lead e confirm-lead não estão publicadas).
+# Continuam no projeto; apenas não são enviados à Vercel.
+/index(1).html
+/confirmar-whatsapp.html
+/assets/confirm-lead.js

@@ -5,7 +5,12 @@
 1. Mantenha a raiz do projeto como diretório estático de publicação; não há
    comando de build nem framework.
 2. `vercel.json` preserva as URLs limpas e rewrites atuais, e aplica cabeçalhos
-   HTTP.
+   HTTP. O HTML mantém o padrão da Vercel
+   `public, max-age=0, must-revalidate`; os recursos em `/assets/` usam TTL
+   público de uma hora porque seus nomes não têm hash de conteúdo.
+   `Vary: Accept-Encoding` identifica a representação Brotli/Gzip negociada
+   pela CDN da Vercel, que já realiza a compressão automaticamente; não adicione
+   uma segunda camada.
 3. `.vercelignore` impede que migrations, código Supabase, documentação,
    arquivos de ambiente, ZIPs, páginas internas de design e `REVISÃO/` sejam
    publicados como conteúdo.
