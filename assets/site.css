@@ -34,7 +34,6 @@
       letter-spacing: .16em;
       text-transform: uppercase;
     }
-    .eyebrow::before { width: 18px; height: 1px; background: var(--olive-hover); content: ""; }
     .section { padding-block: 104px; border-top: 1px solid var(--border); }
     .section-heading { max-width: 680px; margin-bottom: 48px; }
     .section-heading h2 {
@@ -215,7 +214,7 @@
     .hero-video-play[hidden] { display: none; }
     .hero-video-play-mobile-label { display: none; }
     .hero-copy .eyebrow, .hero-copy h1, .hero-copy h1 span, .hero-copy .hero-copy-content > p, .hero-copy .hero-note { color: #000; }
-    .hero-copy .eyebrow::before, .hero-copy .hero-note::before { background: #000; }
+    .hero-copy .hero-note::before { background: #000; }
     .hero-actions .button-secondary { border-color: #000; background: #ffffffc7; color: #000; }
     .hero-actions .button-secondary:hover { border-color: #000; background: #fff; }
     .video-frame {
