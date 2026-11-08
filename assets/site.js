@@ -282,6 +282,7 @@ if (leadForm) {
         sitekey: turnstileSiteKey,
         action: "lead_signup",
         appearance: "interaction-only",
+        theme: "dark",
         callback: setCaptchaToken,
         "expired-callback": () => setCaptchaToken(""),
         "error-callback": () => {
