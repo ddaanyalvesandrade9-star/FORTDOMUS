@@ -585,7 +585,7 @@
     .lead-field input:focus-visible, .lead-consent input:focus-visible { outline: 2px solid var(--silver); outline-offset: 2px; }
     .lead-consent { display: grid; grid-template-columns: 18px 1fr; align-items: start; gap: 10px; color: var(--muted); font-size: .74rem; line-height: 1.55; cursor: pointer; }
     .lead-consent input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--olive-hover); }
-    .lead-captcha { min-height: 65px; }
+    .lead-captcha { min-height: 0; }
     .lead-field-error { min-height: 1em; color: var(--silver); font-size: .7rem; line-height: 1.4; }
     .lead-submit { width: 100%; cursor: pointer; }
     .lead-submit:disabled { opacity: .65; cursor: wait; transform: none; }
@@ -1099,3 +1099,10 @@
     .lead-captcha:empty { display: none; min-height: 0; }
     /* Celular (ate 767px): o rotulo do botao de video passa de "QAP" para "QAP!". Tablet e desktop mantem o texto original. */
     @media (max-width: 767px) { .hero-video-play-mobile-label::after { content: "!"; } }
+
+    /* Confirmação do WhatsApp após o cadastro (V-05): usa as cores e proporções do formulário. */
+    .lead-confirm { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--border); border-radius: 2px; background: var(--surface); }
+    .lead-confirm p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.6; }
+    .lead-confirm .lead-confirm-title { color: var(--text); font-size: .9rem; font-weight: 600; }
+    .lead-confirm-code { display: block; padding: 12px 14px; border: 1px dashed var(--border); color: var(--text); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 1rem; letter-spacing: .08em; text-align: center; user-select: all; overflow-wrap: anywhere; }
+    .lead-confirm .button { width: 100%; text-align: center; }

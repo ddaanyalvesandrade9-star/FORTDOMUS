@@ -167,6 +167,11 @@ if (leadForm) {
   const ERROR_MESSAGE = "Não foi possível realizar seu cadastro. Verifique seus dados e tente novamente.";
   // Falha de conexão ou tempo esgotado (sem resposta do servidor).
   const NETWORK_ERROR_MESSAGE = "Não foi possível enviar seus dados agora. Verifique sua conexão e tente novamente.";
+  // Confirmação inversa do WhatsApp: o servidor devolve um código de uso único; a pessoa o envia, do próprio
+  // número, ao WhatsApp oficial da Fort Domus. O destino é FIXO aqui: nunca vem do servidor nem da URL.
+  const OFFICIAL_WHATSAPP = "https://wa.me/5583999018926";
+  const CONFIRMATION_CODE_PATTERN = /^FD-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/;
+  const CONFIRMATION_PENDING_MESSAGE = "Cadastro recebido. Falta só confirmar o seu WhatsApp.";
   // Mensagens por código HTTP da Edge Function; qualquer outro caso usa a mensagem genérica acima.
   const HTTP_ERROR_MESSAGES = {
     400: "Verifique seus dados e tente novamente.",
@@ -176,6 +181,7 @@ if (leadForm) {
   let isSubmitting = false;
   let captchaToken = "";
   let captchaWidgetId = null;
+  let confirmBox = null;
   const config = window.FORT_DOMUS_SUPABASE_CONFIG;
   const supabaseUrl = config?.url?.trim().replace(/\/+$/, "");
   const publishableKey = config?.publishableKey?.trim();
@@ -212,6 +218,36 @@ if (leadForm) {
     feedback.dataset.state = state;
   }
 
+  // Mostra o código e o botão que abre o WhatsApp com a mensagem pronta. Tudo por textContent/atributos:
+  // nenhum HTML vindo do servidor é interpretado.
+  function showConfirmation(code) {
+    confirmBox?.remove();
+    const box = document.createElement("div");
+    box.className = "lead-confirm";
+    box.setAttribute("role", "group");
+    box.setAttribute("aria-label", "Confirmação do WhatsApp");
+    const title = document.createElement("p");
+    title.className = "lead-confirm-title";
+    title.textContent = "Confirme seu WhatsApp para ativar o cadastro";
+    const text = document.createElement("p");
+    text.textContent = "Toque no botão e envie a mensagem pronta, a partir do seu próprio número. Só entraremos em contato depois dessa confirmação. O código vale por 24 horas e só pode ser usado uma vez.";
+    const codeElement = document.createElement("code");
+    codeElement.className = "lead-confirm-code";
+    codeElement.textContent = code;
+    const link = document.createElement("a");
+    link.className = "button";
+    link.href = `${OFFICIAL_WHATSAPP}?text=${encodeURIComponent(`Confirmo meu cadastro na Fort Domus. Código: ${code}`)}`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    const arrow = document.createElement("span");
+    arrow.setAttribute("aria-hidden", "true");
+    arrow.textContent = "↗";
+    link.append("Confirmar pelo WhatsApp ", arrow);
+    box.append(title, text, codeElement, link);
+    feedback.insertAdjacentElement("afterend", box);
+    confirmBox = box;
+  }
+
   function setSubmitting(active) {
     isSubmitting = active;
     submitButton.disabled = active;
@@ -245,6 +281,7 @@ if (leadForm) {
       captchaWidgetId = window.turnstile.render(captchaContainer, {
         sitekey: turnstileSiteKey,
         action: "lead_signup",
+        appearance: "interaction-only",
         callback: setCaptchaToken,
         "expired-callback": () => setCaptchaToken(""),
         "error-callback": () => {
@@ -300,6 +337,8 @@ if (leadForm) {
       return;
     }
 
+    confirmBox?.remove();
+    confirmBox = null;
     setSubmitting(true);
     setLeadFeedback("Enviando seu cadastro...", "pending");
 
@@ -331,7 +370,15 @@ if (leadForm) {
       }
 
       leadForm.reset();
-      setLeadFeedback(SUCCESS_MESSAGE, "success");
+      // Servidor com confirmação ligada: devolve o código uma única vez. Sem código (servidor antigo),
+      // o comportamento é exatamente o anterior.
+      const confirmation = result.confirmation;
+      if (confirmation && typeof confirmation.code === "string" && CONFIRMATION_CODE_PATTERN.test(confirmation.code)) {
+        setLeadFeedback(CONFIRMATION_PENDING_MESSAGE, "success");
+        showConfirmation(confirmation.code);
+      } else {
+        setLeadFeedback(SUCCESS_MESSAGE, "success");
+      }
     } catch (error) {
       console.error("Erro de comunicação com o servidor de cadastro.", error);
       setLeadFeedback(NETWORK_ERROR_MESSAGE, "error");
