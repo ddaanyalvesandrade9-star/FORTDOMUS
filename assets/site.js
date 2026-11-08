@@ -170,6 +170,7 @@ if (leadForm) {
   // Confirmação inversa do WhatsApp: o servidor devolve um código de uso único; a pessoa o envia, do próprio
   // número, ao WhatsApp oficial da Fort Domus. O destino é FIXO aqui: nunca vem do servidor nem da URL.
   const OFFICIAL_WHATSAPP = "https://wa.me/5583999018926";
+  const OFFICIAL_WHATSAPP_DISPLAY = "(83) 99901-8926";
   const CONFIRMATION_CODE_PATTERN = /^FD-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/;
   const CONFIRMATION_PENDING_MESSAGE = "Cadastro recebido. Falta só confirmar o seu WhatsApp.";
   // Mensagens por código HTTP da Edge Function; qualquer outro caso usa a mensagem genérica acima.
@@ -182,6 +183,8 @@ if (leadForm) {
   let captchaToken = "";
   let captchaWidgetId = null;
   let confirmBox = null;
+  let confirmTimer = 0;
+  let confirmCheck = null;
   const config = window.FORT_DOMUS_SUPABASE_CONFIG;
   const supabaseUrl = config?.url?.trim().replace(/\/+$/, "");
   const publishableKey = config?.publishableKey?.trim();
@@ -218,22 +221,50 @@ if (leadForm) {
     feedback.dataset.state = state;
   }
 
-  // Mostra o código e o botão que abre o WhatsApp com a mensagem pronta. Tudo por textContent/atributos:
-  // nenhum HTML vindo do servidor é interpretado.
-  function showConfirmation(code) {
+  // Mostra o código, as instruções e o botão que abre o WhatsApp com a mensagem pronta. Tudo por
+  // textContent/atributos: nenhum HTML vindo do servidor é interpretado. Quando o código vence (ou
+  // quando a pessoa volta à aba depois do prazo), a caixa troca para o aviso de expiração e oferece
+  // preencher o cadastro de novo.
+  function validityText(minutes) {
+    if (minutes < 1) return "menos de 1 minuto";
+    if (minutes < 60) return `${Math.round(minutes)} minutos`;
+    const hours = Math.round(minutes / 60);
+    return hours === 1 ? "1 hora" : `${hours} horas`;
+  }
+
+  function showConfirmation(code, expiresInMinutes) {
     confirmBox?.remove();
+    window.clearTimeout(confirmTimer);
+    const minutes = Number.isFinite(expiresInMinutes) && expiresInMinutes > 0 ? expiresInMinutes : 1440;
+    const expiresAt = Date.now() + minutes * 60 * 1000;
+    const paragraph = (text, className) => {
+      const element = document.createElement("p");
+      if (className) element.className = className;
+      element.textContent = text;
+      return element;
+    };
+
     const box = document.createElement("div");
     box.className = "lead-confirm";
     box.setAttribute("role", "group");
     box.setAttribute("aria-label", "Confirmação do WhatsApp");
-    const title = document.createElement("p");
-    title.className = "lead-confirm-title";
-    title.textContent = "Confirme seu WhatsApp para ativar o cadastro";
-    const text = document.createElement("p");
-    text.textContent = "Toque no botão e envie a mensagem pronta, a partir do seu próprio número. Só entraremos em contato depois dessa confirmação. O código vale por 24 horas e só pode ser usado uma vez.";
+
+    const steps = document.createElement("ol");
+    steps.className = "lead-confirm-steps";
+    for (const text of [
+      "Toque em “Confirmar pelo WhatsApp”.",
+      "O WhatsApp abre com a mensagem pronta e o seu código. Envie sem alterar.",
+      "Pronto: depois disso o seu cadastro fica ativo.",
+    ]) {
+      const item = document.createElement("li");
+      item.textContent = text;
+      steps.append(item);
+    }
+
     const codeElement = document.createElement("code");
     codeElement.className = "lead-confirm-code";
     codeElement.textContent = code;
+
     const link = document.createElement("a");
     link.className = "button";
     link.href = `${OFFICIAL_WHATSAPP}?text=${encodeURIComponent(`Confirmo meu cadastro na Fort Domus. Código: ${code}`)}`;
@@ -243,7 +274,47 @@ if (leadForm) {
     arrow.setAttribute("aria-hidden", "true");
     arrow.textContent = "↗";
     link.append("Confirmar pelo WhatsApp ", arrow);
-    box.append(title, text, codeElement, link);
+
+    const expire = () => {
+      window.clearTimeout(confirmTimer);
+      confirmCheck = null;
+      if (confirmBox !== box) return;
+      const again = document.createElement("button");
+      again.type = "button";
+      again.className = "button";
+      again.textContent = "Preencher o cadastro novamente";
+      again.addEventListener("click", () => {
+        box.remove();
+        confirmBox = null;
+        setLeadFeedback("", "");
+        nameInput.focus();
+      });
+      box.replaceChildren(
+        paragraph("Código expirado", "lead-confirm-title"),
+        paragraph("Por segurança, o código vale por tempo limitado e já venceu. Para gerar um novo código, preencha o cadastro novamente.", ""),
+        again,
+      );
+      setLeadFeedback("O código de confirmação expirou.", "error");
+    };
+    // Mesmo que o navegador atrase o temporizador (aba em segundo plano, aparelho dormindo), o clique
+    // e o retorno à aba conferem o prazo antes de deixar usar o código.
+    link.addEventListener("click", (event) => {
+      if (Date.now() >= expiresAt) {
+        event.preventDefault();
+        expire();
+      }
+    });
+    confirmCheck = () => { if (Date.now() >= expiresAt) expire(); };
+    confirmTimer = window.setTimeout(expire, Math.min(minutes * 60 * 1000, 2147483647));
+
+    box.append(
+      paragraph("Confirme seu WhatsApp para ativar o cadastro", "lead-confirm-title"),
+      steps,
+      codeElement,
+      link,
+      paragraph(`Se o botão não abrir o WhatsApp, envie o código por mensagem para ${OFFICIAL_WHATSAPP_DISPLAY}, do mesmo número que você cadastrou.`, "lead-confirm-note"),
+      paragraph(`O código vale por ${validityText(minutes)} e só pode ser usado uma vez. Só entraremos em contato depois da confirmação.`, "lead-confirm-note"),
+    );
     feedback.insertAdjacentElement("afterend", box);
     confirmBox = box;
   }
@@ -313,6 +384,7 @@ if (leadForm) {
   nameInput.addEventListener("input", () => setFieldError(nameInput, ""));
   consentInput.addEventListener("change", () => setFieldError(consentInput, ""));
   initializeCaptcha();
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) confirmCheck?.(); });
 
   leadForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -338,6 +410,8 @@ if (leadForm) {
       return;
     }
 
+    window.clearTimeout(confirmTimer);
+    confirmCheck = null;
     confirmBox?.remove();
     confirmBox = null;
     setSubmitting(true);
@@ -376,7 +450,7 @@ if (leadForm) {
       const confirmation = result.confirmation;
       if (confirmation && typeof confirmation.code === "string" && CONFIRMATION_CODE_PATTERN.test(confirmation.code)) {
         setLeadFeedback(CONFIRMATION_PENDING_MESSAGE, "success");
-        showConfirmation(confirmation.code);
+        showConfirmation(confirmation.code, Number(confirmation.expiresInMinutes));
       } else {
         setLeadFeedback(SUCCESS_MESSAGE, "success");
       }
