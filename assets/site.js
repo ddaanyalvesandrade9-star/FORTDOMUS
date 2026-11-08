@@ -1,5 +1,5 @@
 const isLocalFile = location.protocol === "file:";
-const currentPage = isLocalFile ? location.pathname.split("/").pop() : location.pathname;
+const currentPage = isLocalFile ? location.pathname.split("/").pop() : location.pathname.replace(/^[/]{2,}/, "/");
 const heroVideo = document.querySelector(".hero-background-video");
 const heroVideoPlayButton = document.querySelector(".hero-video-play");
 if (heroVideo && heroVideoPlayButton) {

@@ -19,3 +19,12 @@
 /index(1).html
 /confirmar-whatsapp.html
 /assets/confirm-lead.js
+
+# Este site é uma vitrine: as vendas acontecem pelo WhatsApp. Nenhuma função de compra,
+# checkout, painel ou API deve ser publicada, mesmo que alguém adicione estes arquivos por engano.
+/api/
+/comprar*
+/pedido*
+/admin*
+/tests/
+/package.json

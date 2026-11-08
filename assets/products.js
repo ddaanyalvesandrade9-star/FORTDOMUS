@@ -1,6 +1,6 @@
 (() => {
   const products = window.FORT_DOMUS_PRODUCTS || [];
-  const WHATSAPP = "https://wa.me/5583987234968";
+  const WHATSAPP = "https://wa.me/5583999018926";
   const MIN_PHOTOS = 5;
   const MIN_VIDEOS = 2;
   const isLocalFile = location.protocol === "file:";
