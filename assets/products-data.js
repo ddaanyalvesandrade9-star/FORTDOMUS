@@ -105,8 +105,12 @@ window.FORT_DOMUS_PRODUCTS = [
       "Ganchos sob medida, sem improvisações",
       "Acabamento cuidadosamente executado, com camada adicional de proteção",
     ],
-    // Valor ainda não definido: a página mostra "Valor sob consulta" e a nota de entrega.
     price: {
+      cashLabel: "No Pix, dinheiro ou boleto",
+      cash: "R$ 1.199,90",
+      cardLabel: "No cartão de crédito",
+      card: "5x de R$ 259,98 sem juros",
+      cardTotal: "Total de R$ 1.299,90",
       note: "Entrega grátis em Campina Grande. Demais localidades: frete e prazo sob consulta pelo WhatsApp.",
     },
   },
