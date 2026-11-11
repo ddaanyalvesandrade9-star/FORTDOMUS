@@ -33,7 +33,7 @@
   }
 
   const productUrl = (product) => `/produtos/${product.slug}`;
-  const whatsappUrl = (product) => `${WHATSAPP}?text=${encodeURIComponent(`Olá! Tenho interesse no ${product.name} e gostaria de conhecer melhor as opções disponíveis e seus valores.`)}`;
+  const whatsappUrl = (product, variant) => `${WHATSAPP}?text=${encodeURIComponent(`Olá! Tenho interesse no ${product.name}${variant ? ` (${variant.label})` : ""} e gostaria de conhecer melhor as opções disponíveis e seus valores.`)}`;
   const placeholder = (label, hint) => el("div", { class: "photo-slot" }, [
     el("span", { class: "photo-icon", "aria-hidden": "true" }),
     el("strong", { text: label }),
@@ -82,9 +82,20 @@
   document.title = `${product.name} | Fort Domus`;
   document.querySelector('meta[name="description"]')?.setAttribute("content", product.summary || `Conheça o ${product.name} da Fort Domus.`);
 
+  /* Versões (acabamento da base): cada uma é uma variação independente do produto */
+  const FDV = window.FortDomusVariants;
+  const hasVariants = Boolean(FDV && Array.isArray(product.variants) && product.variants.length);
+  let variant = hasVariants ? FDV.pick(product, FDV.readKey()) : null;
+  const pick = (field) => (variant && variant[field] !== undefined ? variant[field] : product[field]);
+
   /* Galeria de fotografias */
-  const photos = [...product.photos];
-  while (photos.length < MIN_PHOTOS) photos.push({ label: `Foto ${photos.length + 1}` });
+  const photoList = (source) => {
+    const items = [...source];
+    while (items.length < MIN_PHOTOS) items.push({ label: `Foto ${items.length + 1}` });
+    return items;
+  };
+  let photoSource = pick("photos");
+  let photos = photoList(photoSource);
   let activePhoto = 0;
 
   const mainImage = el("img", { class: "pg-main-image", alt: "", decoding: "async" });
@@ -95,13 +106,14 @@
   const next = el("button", { class: "pg-arrow pg-arrow-next", type: "button", "aria-label": "Próxima foto" }, icon("m9 5 7 7-7 7"));
   const stage = el("div", { class: "pg-stage", tabindex: "0", role: "group", "aria-roledescription": "galeria", "aria-label": `Fotografias de ${product.name}` }, [mainButton, mainEmpty, previous, next, counter]);
 
-  const thumbButtons = photos.map((photo, index) => {
+  let thumbButtons = [];
+  const buildThumbButtons = () => photos.map((photo, index) => {
     const content = photo.src
       ? el("img", { src: photo.src, alt: photo.alt || `${product.name}, foto ${index + 1}`, width: photo.width, height: photo.height, loading: "lazy", decoding: "async" })
       : el("span", { class: "pg-thumb-empty", "aria-hidden": "true" }, el("span", { class: "photo-icon" }));
     return el("button", { class: "pg-thumb", type: "button", "aria-label": `Ver foto ${index + 1}${photo.src ? "" : " (em breve)"}` }, content);
   });
-  const thumbs = el("div", { class: "pg-thumbs", role: "group", "aria-label": "Miniaturas" }, thumbButtons);
+  const thumbs = el("div", { class: "pg-thumbs", role: "group", "aria-label": "Miniaturas" });
 
   function showPhoto(index) {
     activePhoto = (index + photos.length) % photos.length;
@@ -124,7 +136,20 @@
     }
   }
 
-  thumbButtons.forEach((button, index) => button.addEventListener("click", () => showPhoto(index)));
+  function mountThumbs() {
+    thumbButtons = buildThumbButtons();
+    thumbButtons.forEach((button, index) => button.addEventListener("click", () => showPhoto(index)));
+    thumbs.replaceChildren(...thumbButtons);
+  }
+  // Troca o conjunto de fotos quando a versão escolhida tem fotografias próprias.
+  function setPhotos(source) {
+    photoSource = source;
+    photos = photoList(source);
+    activePhoto = 0;
+    mountThumbs();
+    showPhoto(0);
+  }
+  mountThumbs();
   previous.addEventListener("click", () => showPhoto(activePhoto - 1));
   next.addEventListener("click", () => showPhoto(activePhoto + 1));
   stage.addEventListener("keydown", (event) => {
@@ -147,44 +172,80 @@
   const block = (title, content) => el("section", { class: "pi-block" }, [el("h2", { text: title }), content || soon()]);
   const list = (items) => items.length ? el("ul", { class: "pi-list" }, items.map((item) => el("li", { text: item }))) : null;
 
-  const specList = product.specs.length
-    ? el("dl", { class: "pi-specs" }, product.specs.flatMap((spec) => [el("dt", { text: spec.label }), el("dd", { text: spec.value })]))
-    : null;
-  const dimensions = product.dimensions.length
-    ? el("div", { class: "specs", style: `grid-template-columns: repeat(${Math.min(product.dimensions.length, 3)}, minmax(0, 1fr))`, "aria-label": "Dimensões" },
-      product.dimensions.map((item) => el("div", { class: "spec" }, [el("strong", { text: item.value }), el("span", { text: item.label })])))
-    : null;
+  function buildSpecList(items) {
+    return items && items.length
+      ? el("dl", { class: "pi-specs" }, items.flatMap((spec) => [el("dt", { text: spec.label }), el("dd", { text: spec.value })]))
+      : null;
+  }
+  function buildDimensions(items) {
+    return items && items.length
+      ? el("div", { class: "specs", style: `grid-template-columns: repeat(${Math.min(items.length, 3)}, minmax(0, 1fr))`, "aria-label": "Dimensões" },
+        items.map((item) => el("div", { class: "spec" }, [el("strong", { text: item.value }), el("span", { text: item.label })])))
+      : null;
+  }
 
-  let priceBlock;
-  if (product.price) {
+  function buildPriceBlock() {
+    if (!product.price) return el("div", { class: "pi-price" }, el("p", { class: "pi-price-note", text: "Valor sob consulta. Fale com a gente pelo WhatsApp." }));
     const price = product.price;
-    priceBlock = el("div", { class: "pi-price" }, [
-      price.cash
-        ? el("div", { class: "pi-price-cash" }, [el("span", { class: "pi-price-label", text: price.cashLabel }), el("strong", { text: price.cash })])
+    // Com versões, os textos vêm dos preços em centavos da versão selecionada.
+    const view = variant ? FDV.priceView(product, variant) : { cash: price.cash, card: price.card, cardTotal: price.cardTotal };
+    return el("div", { class: "pi-price" }, [
+      view.cash
+        ? el("div", { class: "pi-price-cash" }, [el("span", { class: "pi-price-label", text: price.cashLabel }), el("strong", { text: view.cash })])
         : el("p", { class: "pi-price-note", text: "Valor sob consulta. Fale com a gente pelo WhatsApp." }),
-      price.card && el("div", { class: "pi-price-card" }, [
+      view.card && el("div", { class: "pi-price-card" }, [
         el("span", { class: "pi-price-label", text: price.cardLabel }),
-        el("strong", { text: price.card }),
-        price.cardTotal && el("small", { text: price.cardTotal }),
+        el("strong", { text: view.card }),
+        view.cardTotal && el("small", { text: view.cardTotal }),
       ]),
       price.note && el("p", { class: "pi-price-note", text: price.note }),
     ]);
-  } else {
-    priceBlock = el("div", { class: "pi-price" }, el("p", { class: "pi-price-note", text: "Valor sob consulta. Fale com a gente pelo WhatsApp." }));
   }
+
+  // Descrição e blocos de informação que podem mudar conforme a versão.
+  function buildSections() {
+    return [
+      pick("description") && el("p", { class: "pi-description", text: pick("description") }),
+      block("Principais características", list(pick("features"))),
+      block("Dimensões", buildDimensions(pick("dimensions"))),
+      block("Especificações técnicas", buildSpecList(pick("specs"))),
+      block("Material de fabricação", pick("material") ? el("p", { text: pick("material") }) : null),
+      block("Diferenciais", list(pick("differentials"))),
+    ];
+  }
+
+  const priceSlot = el("div", { class: "pi-price-slot" }, buildPriceBlock());
+  const sectionsWrap = el("div", { class: "pi-variant-sections" }, buildSections());
+  const cta = el("a", { class: "button pi-cta", href: whatsappUrl(product, variant), target: "_blank", rel: "noopener noreferrer" }, ["SOLICITAR ORÇAMENTO ", el("span", { "aria-hidden": "true", text: "↗" })]);
+  const picker = hasVariants ? FDV.buildPicker(product, variant.key, (next) => applyVariant(next)) : null;
 
   const info = el("div", { class: "product-info", "data-reveal": "" }, [
     el("span", { class: "eyebrow", text: product.eyebrow }),
     el("h1", { text: product.name }),
-    priceBlock,
-    product.description && el("p", { class: "pi-description", text: product.description }),
-    block("Principais características", list(product.features)),
-    block("Dimensões", dimensions),
-    block("Especificações técnicas", specList),
-    block("Material de fabricação", product.material ? el("p", { text: product.material }) : null),
-    block("Diferenciais", list(product.differentials)),
-    el("a", { class: "button pi-cta", href: whatsappUrl(product), target: "_blank", rel: "noopener noreferrer" }, ["SOLICITAR ORÇAMENTO ", el("span", { "aria-hidden": "true", text: "↗" })]),
+    picker && picker.element,
+    priceSlot,
+    sectionsWrap,
+    cta,
   ]);
+  if (variant) {
+    // Referência da versão exibida (somente apresentação; o servidor revalida o preço pelo id).
+    info.dataset.variantId = variant.id;
+    info.dataset.variantPixCents = String(variant.pixCents);
+  }
+
+  function applyVariant(next) {
+    variant = next;
+    priceSlot.replaceChildren(buildPriceBlock());
+    sectionsWrap.replaceChildren(...buildSections().filter(Boolean));
+    cta.href = whatsappUrl(product, variant);
+    info.dataset.variantId = variant.id;
+    info.dataset.variantPixCents = String(variant.pixCents);
+    const nextPhotos = pick("photos");
+    if (nextPhotos !== photoSource) setPhotos(nextPhotos);
+    FDV.writeKey(product, variant);
+    FDV.swap(priceSlot);
+    FDV.swap(sectionsWrap);
+  }
 
   const back = el("a", { class: "product-back", href: "/produtos" }, [icon("m15 5-7 7 7 7"), "Todos os produtos"]);
   page.replaceChildren(back, el("div", { class: "product-catalog-grid" }, [gallery, info]));

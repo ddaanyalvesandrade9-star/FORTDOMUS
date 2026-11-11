@@ -1043,6 +1043,41 @@
     .pi-price-cash strong { color: var(--silver); font-size: clamp(2rem, 4vw, 2.8rem); line-height: 1; letter-spacing: -.04em; }
     .pi-price-card strong { color: var(--silver); font-size: 1.15rem; }
     .pi-price-card small, .pi-price-note { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+
+    /* Seletor de versões (acabamento da base) */
+    .variant-picker { display: grid; gap: 10px; margin: 0 0 18px; }
+    .variant-picker-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .variant-picker-label { color: var(--muted); font: 600 .66rem "Courier New", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .variant-picker-current { color: var(--text); font-size: .85rem; }
+    .variant-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .variant-option {
+      display: grid;
+      gap: 6px;
+      min-height: 64px;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: border-color .28s var(--ease), background-color .28s var(--ease), color .28s var(--ease), box-shadow .28s var(--ease);
+    }
+    .variant-option:hover { border-color: #6a6a6a; color: var(--text); }
+    .variant-option:focus-visible { outline: 2px solid var(--silver); outline-offset: 3px; }
+    .variant-option-name { font: 600 .7rem "Courier New", monospace; letter-spacing: .12em; text-transform: uppercase; }
+    .variant-option-price { font-size: .98rem; font-weight: 650; letter-spacing: -.02em; }
+    .variant-option[aria-checked="true"] { border-color: var(--silver); background: #ffffff0a; color: var(--text); box-shadow: inset 0 0 0 1px var(--silver); }
+    .variant-option[aria-checked="true"] .variant-option-price { color: var(--silver); }
+    @keyframes variant-swap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .is-swapping { animation: variant-swap .34s var(--ease); }
+    .product-price-panel .variant-picker { margin: 14px 0 6px; }
+    .product-price-panel .price-card[hidden] { display: none; }
+    @media (max-width: 560px) {
+      .variant-options { gap: 8px; }
+      .variant-option { padding: 12px; }
+      .variant-option-name { font-size: .66rem; letter-spacing: .08em; }
+    }
     .pi-block { margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); }
     .pi-block h2 { margin: 0 0 12px; color: var(--silver); font: 600 .72rem "Courier New", monospace; letter-spacing: .14em; text-transform: uppercase; }
     .pi-block p { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.7; }

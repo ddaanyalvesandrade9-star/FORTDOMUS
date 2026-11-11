@@ -12,6 +12,12 @@
            Mínimo de 2 espaços; "poster" (imagem de capa) é opcional.
   Campos vazios ("" / [] / null) aparecem como "Informação em breve." na página.
   Preço:   preencha "price" quando definido; com null a página convida a consultar pelo WhatsApp.
+  Versões: cada produto tem "variants" (acabamento da base). Cada versão é uma variação independente, com
+           id estável "<slug>:<chave>" e preços em CENTAVOS (pixCents e, quando definido, cardCents).
+           Os textos de preço ("R$ 599,90", "5x de R$ 129,98 sem juros") são gerados por assets/variantes.js.
+           Opcionais por versão (se ausentes, vale o do produto): photos, features, dimensions, specs,
+           material, differentials, description.
+           Este valor é só de exibição: qualquer cobrança futura deve revalidar o preço pelo id no servidor.
 */
 window.FORT_DOMUS_PRODUCTS = [
   {
@@ -53,12 +59,16 @@ window.FORT_DOMUS_PRODUCTS = [
       "Ganchos sob medida, sem improvisações",
       "Acabamento cuidadosamente executado, com camada adicional de proteção",
     ],
+    defaultVariant: "aco",
+    variants: [
+      { key: "aco", label: "Base de aço", id: "organizador-tatico:aco", pixCents: 59990, cardCents: 64990 },
+      // Cartão da base de madeira: preencher cardCents quando o valor for definido.
+      { key: "madeira", label: "Base de madeira", id: "organizador-tatico:madeira", pixCents: 54990 },
+    ],
     price: {
       cashLabel: "No Pix, dinheiro ou boleto",
-      cash: "R$ 599,90",
       cardLabel: "No cartão de crédito",
-      card: "5x de R$ 129,98 sem juros",
-      cardTotal: "Total de R$ 649,90",
+      installments: 5,
       note: "Entrega grátis em Campina Grande. Demais localidades: frete e prazo sob consulta pelo WhatsApp.",
     },
   },
@@ -105,8 +115,16 @@ window.FORT_DOMUS_PRODUCTS = [
       "Ganchos sob medida, sem improvisações",
       "Acabamento cuidadosamente executado, com camada adicional de proteção",
     ],
-    // Valor ainda não definido: a página mostra "Valor sob consulta" e a nota de entrega.
+    defaultVariant: "aco",
+    variants: [
+      { key: "aco", label: "Base de aço", id: "organizador-tatico-com-cofre:aco", pixCents: 119990, cardCents: 129990 },
+      // Cartão da base de madeira: preencher cardCents quando o valor for definido.
+      { key: "madeira", label: "Base de madeira", id: "organizador-tatico-com-cofre:madeira", pixCents: 114990 },
+    ],
     price: {
+      cashLabel: "No Pix, dinheiro ou boleto",
+      cardLabel: "No cartão de crédito",
+      installments: 5,
       note: "Entrega grátis em Campina Grande. Demais localidades: frete e prazo sob consulta pelo WhatsApp.",
     },
   },

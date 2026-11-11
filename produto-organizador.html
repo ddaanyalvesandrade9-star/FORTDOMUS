@@ -10,6 +10,8 @@
   <link rel="icon" href="assets/fort-domus-logo.png" type="image/png">
   <link rel="stylesheet" href="assets/site.css">
   <script defer src="assets/supabase-config.js"></script>
+  <script defer src="assets/products-data.js"></script>
+  <script defer src="assets/variantes.js"></script>
   <script defer src="assets/site.js"></script>
 </head>
 <body>
@@ -125,8 +127,9 @@
 
     <section class="investment-section" aria-label="Investimento no Organizador Tático">
       <div class="container investment-panel product-price-panel" data-reveal>
-        <div class="product-price-details">
+        <div class="product-price-details" data-variant-product="organizador-tatico">
           <span class="eyebrow">Condições de pagamento</span>
+          <div data-variant-slot></div>
           <div class="price">
             <div class="price-cash">
               <span class="price-label">NO PIX, DINHEIRO OU BOLETO</span>
