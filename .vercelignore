@@ -28,3 +28,6 @@
 /admin*
 /tests/
 /package.json
+
+# Originais em PNG das fotos de produto: o site usa as versões otimizadas (.webp/.avif/.jpg)
+/assets/produtos/*.png

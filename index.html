@@ -10,6 +10,8 @@
   <link rel="icon" href="assets/fort-domus-logo.png" type="image/png">
   <link rel="stylesheet" href="assets/site.css?v=clean-headings-20261102">
   <script defer src="assets/supabase-config.js"></script>
+  <script defer src="assets/products-data.js"></script>
+  <script defer src="assets/catalogo.js"></script>
   <script defer src="assets/site.js?v=mobile-qap-20261102"></script>
 </head>
 <body>
@@ -44,10 +46,6 @@
 
   <main id="conteudo">
     <section class="hero" id="inicio">
-      <video class="hero-background-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/fort-domus-produto.jpg" aria-hidden="true" tabindex="-1">
-        <source src="assets/fort-domus-hero.mp4" type="video/mp4">
-      </video>
-      <div class="hero-backdrop-shade" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
           <div class="hero-copy-content" data-reveal>
@@ -60,11 +58,10 @@
             </div>
             <div class="hero-note">Organização para a rotina de quem protege</div>
           </div>
-          <button class="button button-secondary hero-video-play" type="button" hidden aria-hidden="true"><span class="hero-video-play-mobile-label">QAP</span><span class="hero-video-play-desktop-label">Reproduzir vídeo</span></button>
         </div>
 
         <div class="video-frame" data-reveal>
-          <img class="hero-video" src="assets/fort-domus-produto.jpg" alt="Organizador Tático com uniforme, colete, cinto, boné e coturnos" width="1300" height="1734" fetchpriority="high">
+          <picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 40vw, 90vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 90vw"><img class="hero-video" src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 90vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" fetchpriority="high" decoding="async"></picture><span class="ilus-badge ilus-badge--topo" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
           <div class="video-shade" aria-hidden="true"></div>
           <div class="video-status">
             <div>
@@ -157,33 +154,22 @@
     <section class="section gallery-section">
       <div class="container home-product">
         <figure class="home-product-photo" data-reveal>
-          <img src="assets/fort-domus-produto.jpg" alt="Organizador Tático com os equipamentos acomodados" width="1300" height="1734" loading="lazy">
+          <picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 40vw, 100vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 100vw"><img src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 100vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" loading="lazy" decoding="async"></picture><span class="ilus-badge" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
         </figure>
         <div class="home-product-copy" data-reveal>
           <span class="eyebrow">Produto em destaque</span>
           <h2>Organizador Tático</h2>
           <p>Conheça o organizador vertical desenvolvido para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço.</p>
-          <a class="button" href="/produtos#catalogo">Conhecer nossos produtos <span aria-hidden="true">↗</span></a>
+          <a class="button button-tactical" href="/equipamentos">Explorar equipamentos <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
 
-    <section class="investment-section product-price-section" aria-label="Preço e formas de pagamento do Organizador Tático">
+    <section class="investment-section product-price-section" aria-label="Preços dos equipamentos">
       <div class="container investment-panel product-price-panel" data-reveal>
         <div class="product-price-details">
           <span class="eyebrow">Condições de pagamento</span>
-          <div class="price">
-            <div class="price-cash">
-              <span class="price-label">NO PIX, DINHEIRO OU BOLETO</span>
-              <strong>R$ 599,90</strong>
-            </div>
-            <div class="price-card">
-              <span class="price-label">NO CARTÃO DE CRÉDITO</span>
-              <strong>5x de R$ 129,98</strong>
-              <span>sem juros</span>
-              <small>Total de R$ 649,90</small>
-            </div>
-          </div>
+          <div class="price price-from"><div class="price-cash"><strong data-min-pix>Veja os preços em Equipamentos</strong></div></div>
           <div class="delivery-note">
             <p><strong>Entrega grátis em Campina Grande</strong></p>
             <p>Demais localidades: frete e prazo sob consulta pelo WhatsApp.</p>

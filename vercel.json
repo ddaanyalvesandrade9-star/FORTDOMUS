@@ -55,6 +55,18 @@
       "destination": "/assets/:path*"
     },
     {
+      "source": "/equipamentos",
+      "destination": "/equipamentos.html"
+    },
+    {
+      "source": "/produtos/organizador-cofre-simples",
+      "destination": "/produto-organizador-cofre-simples"
+    },
+    {
+      "source": "/produtos/organizador-cofre-premium",
+      "destination": "/produto-organizador-cofre-premium"
+    },
+    {
       "source": "/produtos/:slug",
       "destination": "/produto"
     },
@@ -89,6 +101,23 @@
     {
       "source": "/termos-de-uso",
       "destination": "/termos-de-uso.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/produtos",
+      "destination": "/equipamentos",
+      "permanent": false
+    },
+    {
+      "source": "/produtos/organizador-tatico-com-cofre",
+      "destination": "/equipamentos",
+      "permanent": false
+    },
+    {
+      "source": "/produtos/organizador-tatico",
+      "destination": "/produtos/organizador",
+      "permanent": false
     }
   ]
 }

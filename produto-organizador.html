@@ -10,6 +10,9 @@
   <link rel="icon" href="assets/fort-domus-logo.png" type="image/png">
   <link rel="stylesheet" href="assets/site.css">
   <script defer src="assets/supabase-config.js"></script>
+  <script defer src="assets/products-data.js"></script>
+  <script defer src="assets/catalogo.js"></script>
+  <script defer src="assets/organizador-estatico.js"></script>
   <script defer src="assets/site.js"></script>
 </head>
 <body>
@@ -32,18 +35,17 @@
     </div>
   </header>
 
-  <main id="conteudo">
+  <main id="conteudo" data-organizador-estatico="organizador">
     <section class="container detail-grid" id="produto">
       <figure class="product-photo" data-reveal>
-        <button class="product-image-button" type="button" data-gallery aria-label="Ampliar foto do Organizador Tático">
-          <img src="assets/fort-domus-produto.jpg" alt="Organizador Tático com uniforme, colete, cinto, boné e coturnos" width="1300" height="1734" fetchpriority="high">
+        <button class="product-image-button" type="button" data-gallery data-versao-foto data-eager="true" data-sizes="(min-width: 900px) 48vw, 100vw" aria-label="Imagem ilustrativa. Ampliar foto do Organizador Tático"><picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 48vw, 100vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 48vw, 100vw"><img src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 48vw, 100vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" fetchpriority="high" decoding="async"></picture><span class="ilus-badge" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
         </button>
         <figcaption class="photo-caption">Organizador Tático</figcaption>
       </figure>
       <div class="detail-copy" data-reveal>
         <span class="eyebrow">Feito para a sua rotina</span>
         <h1>Seu equipamento.<br>Um lugar certo.</h1>
-        <p>Um organizador vertical para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço.</p>
+        <p>Um organizador vertical para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço.</p><div data-ver-slot></div><div data-price-slot></div><a class="button pi-cta pi-buy" data-buy href="https://wa.me/5583999018926" target="_blank" rel="noopener noreferrer">Comprar pelo WhatsApp <span aria-hidden="true">↗</span></a><p class="pi-description" data-versao-desc></p>
         <div class="specs" aria-label="Dimensões do organizador">
           <div class="spec"><strong>≈ 105 cm</strong><span>Altura</span></div>
           <div class="spec"><strong>45 cm</strong><span>Largura</span></div>
@@ -61,15 +63,14 @@
           <p>Os espaços indicam os enquadramentos previstos para as próximas fotografias reais do produto.</p>
         </div>
         <div class="product-gallery-grid">
-          <figure class="gallery-item" data-gallery data-reveal>
-            <img src="assets/fort-domus-produto.jpg" alt="Vista completa do Organizador Tático" width="1300" height="1734" loading="lazy">
+          <figure class="gallery-item" data-gallery data-reveal data-versao-foto data-sizes="(min-width: 900px) 30vw, 100vw"><picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 30vw, 100vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 30vw, 100vw"><img src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 30vw, 100vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" loading="lazy" decoding="async"></picture><span class="ilus-badge" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
             <figcaption class="photo-caption">Vista completa</figcaption>
           </figure>
           <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Vista lateral</strong><span>Espaço para fotografia real do produto</span></figure>
           <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Vista traseira</strong><span>Espaço para fotografia real do produto</span></figure>
           <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Detalhes da estrutura</strong><span>Espaço para fotografia real de detalhe</span></figure>
           <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Detalhes dos ganchos</strong><span>Espaço para fotografia real de detalhe</span></figure>
-          <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Acabamento da madeira</strong><span>Espaço para fotografia real de detalhe</span></figure>
+          <figure class="photo-slot" data-reveal data-somente-versao="madeira" hidden><span class="photo-icon" aria-hidden="true"></span><strong>Acabamento da madeira</strong><span>Espaço para fotografia real de detalhe</span></figure>
           <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Em ambiente real</strong><span>Espaço para fotografia real do produto</span></figure>
         </div>
       </div>
@@ -85,12 +86,11 @@
             <ul class="quality-list" aria-label="Qualidades do organizador">
               <li><strong>Aço galvanizado</strong><span>Tubos de aço 20x20 mm e chapa de aço 18, com proteção contra corrosão e ferrugem.</span></li>
               <li><strong>Pintura de qualidade</strong><span>Acabamento uniforme e uma camada adicional de proteção para a estrutura.</span></li>
-              <li><strong>Madeira tratada</strong><span>Madeira com aplicação de stain para ajudar a proteger contra a umidade.</span></li>
+              <li data-somente-versao="madeira" hidden><strong>Madeira tratada</strong><span>Madeira com aplicação de stain para ajudar a proteger contra a umidade.</span></li>
               <li><strong>Ganchos sob medida</strong><span>Encaixes desenvolvidos para acomodar cada equipamento sem improvisações.</span></li>
             </ul>
           </div>
-          <figure class="craftsmanship-photo" data-reveal>
-            <img src="assets/fort-domus-produto.jpg" alt="Organizador Tático com estrutura, madeira e ganchos acomodando os equipamentos" width="1300" height="1734" loading="lazy">
+          <figure class="craftsmanship-photo" data-reveal data-versao-foto data-sizes="(min-width: 900px) 40vw, 100vw"><picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 40vw, 100vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 100vw"><img src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 100vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" loading="lazy" decoding="async"></picture><span class="ilus-badge" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
             <figcaption>Organizador Tático · construção e detalhes</figcaption>
           </figure>
         </div>
@@ -104,7 +104,7 @@
             <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe da pintura do organizador"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="m19 43 21-21 7 7-21 21-10 3zM36 26l7 7M43 13l1.5 4.5L49 19l-4.5 1.5L43 25l-1.5-4.5L37 19l4.5-1.5z"></path></svg><span>Foto real da pintura em detalhe · em breve</span></div></figure>
             <div class="material-card-copy"><h3>Pintura de qualidade</h3><p>Acabamento cuidadosamente executado, que valoriza o visual do produto e proporciona uma camada adicional de proteção à estrutura metálica.</p></div>
           </article>
-          <article class="material-card" data-reveal>
+          <article class="material-card" data-reveal data-somente-versao="madeira" hidden>
             <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe da madeira tratada"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 18h38v28H13zM18 25c7 5 15-5 28 1M18 34c8 5 15-4 28 1M18 41c8 4 15-3 28 1"></path></svg><span>Foto real da madeira em detalhe · em breve</span></div></figure>
             <div class="material-card-copy"><h3>Madeira tratada</h3><p>Utilizamos madeira com aplicação de stain, um tratamento que ajuda a proteger a superfície contra a umidade e contribui para conservar sua aparência.</p></div>
           </article>
@@ -184,7 +184,7 @@
 
   <dialog class="gallery-lightbox" id="gallery-lightbox" aria-label="Visualização das fotografias do produto">
     <div class="lightbox-toolbar"><span class="lightbox-count" aria-live="polite"></span><button type="button" data-lightbox-action="close" aria-label="Fechar visualização">×</button></div>
-    <img class="lightbox-image" src="assets/fort-domus-produto.jpg" alt="">
+    <img class="lightbox-image" src="assets/produtos/organizador-aco-720.webp" alt="">
     <div class="lightbox-navigation"><button type="button" data-lightbox-action="previous" aria-label="Fotografia anterior">Anterior</button><button type="button" data-lightbox-action="next" aria-label="Próxima fotografia">Próxima</button></div>
   </dialog>
 

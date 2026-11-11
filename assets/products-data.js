@@ -1,113 +1,171 @@
 /*
-  Catálogo de produtos Fort Domus — única fonte de dados da lista (/produtos)
-  e das páginas individuais (/produtos/<slug>).
+  Cadastro único de produtos e versões da Fort Domus.
+  É a ÚNICA fonte de preços, textos e fotos: a vitrine (/equipamentos), as páginas de produto, a página inicial,
+  os dados estruturados (SEO) e a mensagem do WhatsApp leem tudo daqui. Nenhum componente repete valores.
 
-  Para adicionar um produto: copie um bloco, troque o "slug" e preencha os dados.
-  A rota /produtos/<slug> passa a existir sozinha (ver vercel.json: /produtos/:slug).
+  Cada produto tem duas versões (acabamento da base): "aco" e "madeira".
+  Cada versão é uma variação independente, com:
+    id            identificador estável "<slug do produto>:<chave da versão>"
+    key / label   chave usada na URL (?versao=aco | ?versao=madeira) e nome exibido
+    precoPix      preço no Pix, em CENTAVOS
+    precoCartao   preço no cartão, em CENTAVOS (null = não exibir)
+    parcelas      número de parcelas sem juros (5)
+    valorParcela  valor de cada parcela, em CENTAVOS (parcelas x valorParcela = precoCartao)
+    fotos         lista de fotos { src, alt, width, height }. O arquivo .png é o original; o site usa as
+                  versões -360/-540/-720/-1136 em .avif e .webp geradas a partir dele.
+                  Sem fotos (ou arquivo ausente), o site mostra o espaço "Foto em produção".
+    ilustrativa   true = mostra "Imagem ilustrativa" no card e na galeria. Troque para false ao usar foto real.
+    descricaoCurta, destaques, specs   textos da versão (só o que foi confirmado)
+    status        reservado (disponível / sob encomenda / em breve). Vazio: não é exibido.
 
-  Fotos:   coloque os arquivos em assets/products/<slug>/ e informe o caminho em "src".
-           A galeria mostra no mínimo 5 espaços; entradas sem "src" aparecem como espaço reservado.
-           Para mais de 5 fotos, basta acrescentar itens ao array.
-  Vídeos:  arquivos MP4 em assets/products/<slug>/ (reproduzidos no próprio site).
-           Mínimo de 2 espaços; "poster" (imagem de capa) é opcional.
-  Campos vazios ("" / [] / null) aparecem como "Informação em breve." na página.
-  Preço:   preencha "price" quando definido; com null a página convida a consultar pelo WhatsApp.
+  Para trocar uma imagem: salve o arquivo em assets/produtos/ com o nome indicado em "src", gere os tamanhos
+  responsivos e, se for foto real, mude "ilustrativa" para false. Detalhes em docs/roteiro-imagens.md.
 */
 window.FORT_DOMUS_PRODUCTS = [
   {
-    slug: "organizador-tatico",
+    slug: "organizador",
     name: "Organizador Tático",
-    eyebrow: "Organização para a sua rotina",
+    category: "Organização para a sua rotina",
     summary: "Um organizador vertical para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço.",
-    cardImage: { src: "assets/fort-domus-produto.jpg", alt: "Organizador Tático com uniforme, colete, cinto, boné e coturnos", width: 1300, height: 1734 },
-    description: "Muito mais que um organizador. Uma estrutura desenvolvida para acomodar seus equipamentos com resistência, praticidade e qualidade.",
-    photos: [
-      { src: "assets/fort-domus-produto.jpg", alt: "Vista completa do Organizador Tático", width: 1300, height: 1734 },
-      { label: "Vista lateral" },
-      { label: "Detalhes da estrutura" },
-      { label: "Detalhes dos ganchos" },
-      { label: "Em ambiente real" },
-    ],
-    videos: [
-      { title: "Vídeo demonstrativo 1" },
-      { title: "Vídeo demonstrativo 2" },
-    ],
-    features: [
-      "Organizador vertical",
-      "Acomoda farda, colete, cinto, boné e coturno",
-      "Ganchos sob medida para cada equipamento",
-      "Pintura de qualidade",
+    defaultVersion: "aco",
+    highlights: [
+      "Estrutura em tubo de aço galvanizado 20×20 mm e chapa de aço 18",
+      "Pintura de alta qualidade",
+      "Ganchos sob medida",
+      "Para farda, colete, cinto, boné, coturnos e acessórios",
     ],
     specs: [
-      { label: "Estrutura", value: "Tubos de aço 20x20 mm e chapa de aço 18" },
-      { label: "Proteção", value: "Aço galvanizado, com camada de zinco contra corrosão e ferrugem" },
-      { label: "Madeira", value: "Aplicação de stain para ajudar a proteger contra a umidade" },
+      { label: "Estrutura", value: "Tubo de aço galvanizado 20×20 mm e chapa de aço 18" },
+      { label: "Pintura", value: "Pintura de alta qualidade" },
+      { label: "Ganchos", value: "Ganchos sob medida" },
+      { label: "Base", value: "45 × 45 cm" },
     ],
-    dimensions: [
-      { label: "Altura", value: "≈ 105 cm" },
-      { label: "Largura", value: "45 cm" },
-      { label: "Profundidade", value: "45 cm" },
+    uso: "Para farda, colete, cinto, boné, coturnos e acessórios.",
+    garantia: "Garantia de 90 dias contra defeito de fabricação.",
+    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete e prazo sob consulta no WhatsApp.",
+    versions: [
+      {
+        id: "organizador:aco", key: "aco", label: "Base de aço",
+        precoPix: 59990, precoCartao: 64990, parcelas: 5, valorParcela: 12998,
+        fotos: [{ src: "assets/produtos/organizador-aco.png", alt: "Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos", width: 1136, height: 1408 }],
+        ilustrativa: true,
+        descricaoCurta: "Bandeja superior em aço e prateleira inferior em grade de aço.",
+        destaques: ["Bandeja superior em aço", "Prateleira inferior em grade de aço"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em aço e prateleira inferior em grade de aço" }],
+        status: "",
+      },
+      {
+        id: "organizador:madeira", key: "madeira", label: "Base de madeira",
+        precoPix: 54990, precoCartao: 59990, parcelas: 5, valorParcela: 11998,
+        fotos: [{ src: "assets/produtos/organizador-madeira.png", alt: "Organizador Tático com base de madeira: bandeja superior e prateleira inferior em madeira clara sobre estrutura metálica preta, com farda, colete, cinto, boné e coturnos", width: 1136, height: 1408 }],
+        ilustrativa: true,
+        descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
+        destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
+        status: "",
+      },
     ],
-    material: "Aço galvanizado e madeira tratada com stain.",
-    differentials: [
-      "Ganchos sob medida, sem improvisações",
-      "Acabamento cuidadosamente executado, com camada adicional de proteção",
-    ],
-    price: {
-      cashLabel: "No Pix, dinheiro ou boleto",
-      cash: "R$ 599,90",
-      cardLabel: "No cartão de crédito",
-      card: "5x de R$ 129,98 sem juros",
-      cardTotal: "Total de R$ 649,90",
-      note: "Entrega grátis em Campina Grande. Demais localidades: frete e prazo sob consulta pelo WhatsApp.",
-    },
   },
   {
-    slug: "organizador-tatico-com-cofre",
-    name: "Organizador Tático com Cofre",
-    eyebrow: "Organização para a sua rotina",
-    cardEyebrow: "Organização e segurança para a sua rotina",
-    summary: "Um organizador vertical completo para acomodar farda, colete, cinto, boné e coturno, integrando um compartimento com cofre para o armazenamento seguro da sua pistola / arma curta e munição.",
-    cardImage: null,
-    description: "Muito mais que um organizador. Uma estrutura desenvolvida para acomodar seus equipamentos com resistência, praticidade e a segurança de um compartimento dedicado.",
-    photos: [
-      { label: "Vista completa" },
-      { label: "Vista lateral" },
-      { label: "Detalhes do cofre" },
-      { label: "Detalhes da estrutura" },
-      { label: "Em ambiente real" },
-    ],
-    videos: [
-      { title: "Vídeo demonstrativo 1" },
-      { title: "Vídeo demonstrativo 2" },
-    ],
-    features: [
-      "Organizador vertical com cofre integrado",
-      "Acomoda farda, colete, cinto, boné, coturno e pistola / arma curta (no cofre)",
-      "Ganchos sob medida para cada equipamento",
-      "Compartimento com cofre para armazenamento seguro de arma curta e munição",
-      "Pintura de qualidade",
+    slug: "organizador-cofre-simples",
+    name: "Organizador Tático com Cofre Simples",
+    category: "Organização e segurança para a sua rotina",
+    summary: "Organizador com cofre eletrônico compacto fixado no topo, para guardar documentos, dinheiro e objetos de valor.",
+    defaultVersion: "aco",
+    highlights: [
+      "Cofre eletrônico compacto fixado no topo, com abertura por senha e chave",
+      "Para guardar documentos, dinheiro e objetos de valor",
+      "Estrutura em tubo de aço galvanizado 20×20 mm e chapa de aço 18",
+      "Pintura de alta qualidade",
+      "Ganchos sob medida",
+      "Para farda, colete, cinto, boné, coturnos e acessórios",
     ],
     specs: [
-      { label: "Estrutura", value: "Tubos de aço 20x20 mm e chapa de aço 18" },
-      { label: "Proteção", value: "Aço galvanizado, com camada de zinco contra corrosão e ferrugem" },
-      { label: "Madeira", value: "Aplicação de stain para ajudar a proteger contra a umidade" },
-      { label: "Segurança", value: "Cofre de alta resistência acoplado à estrutura metálica" },
+      { label: "Estrutura", value: "Tubo de aço galvanizado 20×20 mm e chapa de aço 18" },
+      { label: "Pintura", value: "Pintura de alta qualidade" },
+      { label: "Ganchos", value: "Ganchos sob medida" },
+      { label: "Base", value: "45 × 45 cm" },
+      { label: "Cofre", value: "Cofre eletrônico compacto fixado no topo" },
+      { label: "Abertura do cofre", value: "Senha e chave" },
+      { label: "Medidas do cofre", value: "20 × 35 × 20 cm (aproximadas)" },
     ],
-    dimensions: [
-      { label: "Altura", value: "≈ 105 cm" },
-      { label: "Largura", value: "45 cm" },
-      { label: "Profundidade", value: "45 cm" },
+    uso: "Cofre para guardar documentos, dinheiro e objetos de valor. Organizador para farda, colete, cinto, boné, coturnos e acessórios.",
+    garantia: "Garantia de 90 dias contra defeito de fabricação.",
+    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete e prazo sob consulta no WhatsApp.",
+    versions: [
+      {
+        id: "organizador-cofre-simples:aco", key: "aco", label: "Base de aço",
+        precoPix: 99990, precoCartao: 109990, parcelas: 5, valorParcela: 21998,
+        fotos: [{ src: "assets/produtos/organizador-cofre-simples-aco.png", alt: "Organizador Tático com Cofre Simples e base de aço: cofre eletrônico de porta frontal, com teclado e chave, fixado na bandeja superior, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
+        ilustrativa: true,
+        descricaoCurta: "Bandeja superior em aço e prateleira inferior em grade de aço.",
+        destaques: ["Bandeja superior em aço", "Prateleira inferior em grade de aço"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em aço e prateleira inferior em grade de aço" }],
+        status: "",
+      },
+      {
+        id: "organizador-cofre-simples:madeira", key: "madeira", label: "Base de madeira",
+        precoPix: 94990, precoCartao: 104990, parcelas: 5, valorParcela: 20998,
+        fotos: [{ src: "assets/produtos/organizador-cofre-simples-madeira.png", alt: "Organizador Tático com Cofre Simples e base de madeira: cofre eletrônico de porta frontal, com teclado e chave, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
+        ilustrativa: true,
+        descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
+        destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
+        status: "",
+      },
     ],
-    material: "Aço galvanizado, madeira tratada com stain e cofre em chapa reforçada.",
-    differentials: [
-      "Compartimento com cofre integrado para restrição de acesso e segurança da arma",
-      "Ganchos sob medida, sem improvisações",
-      "Acabamento cuidadosamente executado, com camada adicional de proteção",
+  },
+  {
+    slug: "organizador-cofre-premium",
+    name: "Organizador Tático com Cofre Premium",
+    category: "Organização e segurança para a sua rotina",
+    summary: "Organizador com cofre eletrônico fixado no topo, com abertura por biometria, para guardar documentos, dinheiro e objetos de valor.",
+    defaultVersion: "aco",
+    highlights: [
+      "Cofre eletrônico fixado no topo, com abertura superior por biometria (impressão digital), senha ou chave de emergência",
+      "Entrada USB-C para emergência",
+      "Interior do cofre forrado com espuma",
+      "Para guardar documentos, dinheiro e objetos de valor",
+      "Estrutura em tubo de aço galvanizado 20×20 mm e chapa de aço 18",
+      "Pintura de alta qualidade",
+      "Ganchos sob medida",
+      "Para farda, colete, cinto, boné, coturnos e acessórios",
     ],
-    // Valor ainda não definido: a página mostra "Valor sob consulta" e a nota de entrega.
-    price: {
-      note: "Entrega grátis em Campina Grande. Demais localidades: frete e prazo sob consulta pelo WhatsApp.",
-    },
+    specs: [
+      { label: "Estrutura", value: "Tubo de aço galvanizado 20×20 mm e chapa de aço 18" },
+      { label: "Pintura", value: "Pintura de alta qualidade" },
+      { label: "Ganchos", value: "Ganchos sob medida" },
+      { label: "Base", value: "45 × 45 cm" },
+      { label: "Cofre", value: "Cofre eletrônico fixado no topo" },
+      { label: "Abertura do cofre", value: "Superior, por biometria (impressão digital), senha ou chave de emergência" },
+      { label: "Emergência", value: "Entrada USB-C" },
+      { label: "Interior do cofre", value: "Forrado com espuma" },
+      { label: "Medidas do cofre", value: "31,5 × 29 × 9,5 cm (externas)" },
+    ],
+    uso: "Cofre para guardar documentos, dinheiro e objetos de valor. Organizador para farda, colete, cinto, boné, coturnos e acessórios.",
+    garantia: "Garantia de 90 dias contra defeito de fabricação.",
+    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete e prazo sob consulta no WhatsApp.",
+    versions: [
+      {
+        id: "organizador-cofre-premium:aco", key: "aco", label: "Base de aço",
+        precoPix: 129990, precoCartao: 139990, parcelas: 5, valorParcela: 27998,
+        fotos: [{ src: "assets/produtos/organizador-cofre-premium-aco.png", alt: "Organizador Tático com Cofre Premium e base de aço: cofre baixo com tampa superior e leitor de impressão digital fixado no topo, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
+        ilustrativa: true,
+        descricaoCurta: "Bandeja superior em aço e prateleira inferior em grade de aço.",
+        destaques: ["Bandeja superior em aço", "Prateleira inferior em grade de aço"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em aço e prateleira inferior em grade de aço" }],
+        status: "",
+      },
+      {
+        id: "organizador-cofre-premium:madeira", key: "madeira", label: "Base de madeira",
+        precoPix: 124990, precoCartao: 134990, parcelas: 5, valorParcela: 26998,
+        fotos: [{ src: "assets/produtos/organizador-cofre-premium-madeira.png", alt: "Organizador Tático com Cofre Premium e base de madeira: cofre baixo com tampa aberta, teclado e leitor de impressão digital, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
+        ilustrativa: true,
+        descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
+        destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
+        status: "",
+      },
+    ],
   },
 ];
