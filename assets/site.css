@@ -872,7 +872,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-      .hero { background: linear-gradient(#ffffff59, #ffffff59), url("../assets/fort-domus-produto.jpg") center 42% / cover, var(--surface); }
+      .hero { background: linear-gradient(#ffffff59, #ffffff59), url("../assets/produtos/organizador-aco-1136.webp") center 42% / cover, var(--surface); }
       [data-reveal] { opacity: 1; transform: none; }
       html.motion-ready [data-reveal] { animation: none; }
       .scroll-progress-dots button::before { transition: none; }
@@ -1288,12 +1288,12 @@
       main :where(p, li, dd) { max-width: 72ch; }
       .legal-content { margin-left: var(--page-gutter); margin-right: auto; }
 
-      /* Início: hero ocupa a largura e a altura visível; foto encostada à direita, sem ampliar além do original */
-      .hero { display: flex; min-height: clamp(640px, calc(100vh - var(--header-h)), 1200px); padding-block: 0; }
-      .hero-grid.container { flex: 1; width: 100%; max-width: none; margin: 0; gap: 0; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
-      .hero-copy { align-self: center; padding: 56px clamp(32px, 4vw, 96px) 56px var(--page-gutter); }
-      .hero .video-frame { aspect-ratio: auto; min-height: 0; border: 0; background: #cccbcb; box-shadow: none; }
-      .hero .video-frame .hero-video { inset: 0; width: 100%; height: 100%; max-width: 1136px; max-height: 1408px; margin: auto; object-fit: contain; object-position: center; filter: none; }
+      /* Início: o vídeo cobre a largura e a altura da tela; a foto é um cartão flutuante à direita, com zoom ao passar o mouse */
+      .hero { display: flex; align-items: center; min-height: clamp(640px, calc(100vh - var(--header-h)), 1200px); padding-block: 48px; }
+      .hero-grid { flex: none; width: min(var(--content), calc(100% - 2 * var(--page-gutter))); grid-template-columns: minmax(0, 1fr) auto; gap: clamp(32px, 4vw, 96px); align-items: center; }
+      .hero .video-frame { justify-self: end; width: clamp(420px, 28vw, 540px); min-height: 0; aspect-ratio: 4 / 5; }
+      .hero .video-frame .hero-video { object-position: center; transition: transform .8s var(--ease); }
+      @media (hover: hover) and (pointer: fine) { .hero .video-frame:hover .hero-video { transform: scale(1.07); } }
 
       /* Grades de produtos: largura útil inteira, espaçamento proporcional */
       .eq-grid { gap: var(--eq-gap); }
@@ -1308,4 +1308,9 @@
       .detail-grid { grid-template-columns: minmax(0, 1136px) minmax(420px, 720px); justify-content: center; gap: clamp(40px, 6vw, 120px); }
       .detail-grid .product-photo { width: min(100%, calc((100vh - 130px) * .8)); justify-self: center; }
       .detail-grid .product-photo img { min-height: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero .video-frame .hero-video { transition: none; }
+      .hero .video-frame:hover .hero-video { transform: none; }
     }
