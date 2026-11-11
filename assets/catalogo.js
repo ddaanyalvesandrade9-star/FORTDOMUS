@@ -221,14 +221,14 @@
   }
 
   /* ---------- Card da vitrine ---------- */
-  function buildCard(product, { eager = false } = {}) {
+  function buildCard(product, { eager = false, headingLevel = 2 } = {}) {
     let version = versionOf(product, product.defaultVersion);
     const card = el("article", "eq-card");
     card.dataset.produto = product.slug;
 
     const media = mediaBox(version, { eager });
     const body = el("div", "eq-body");
-    const title = el("h2", "eq-name");
+    const title = el(`h${headingLevel}`, "eq-name");
     const link = el("a", "eq-link", product.name);
     link.href = productPath(product, version, true);
     title.append(link);

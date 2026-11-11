@@ -1257,3 +1257,18 @@
     .product-price-panel .price.price-from { grid-template-columns: 1fr; }
     @media (max-width: 639px) { .eq-name { min-height: 0; } }
     .eq-grid:not([data-pronto]), [data-product-page]:not([data-pronto]) { min-height: 100vh; }
+
+    /* Início: linha de produtos (mesmos cards da vitrine) e condições de pagamento gerais */
+    .home-line-section .section-heading { margin-bottom: 40px; }
+    .home-line-section .eq-grid { padding-bottom: 48px; }
+    .home-line-section .eq-grid:not([data-pronto]) { min-height: calc(1.25 * ((min(1180px, 100vw - 48px) - 2 * clamp(20px, 3vw, 40px)) / 3) + 340px); }
+    .home-line-cta { display: flex; justify-content: center; padding-bottom: 96px; }
+    .pay-items { display: grid; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+    .pay-items li { color: var(--text); font: 600 .78rem "Courier New", monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .pay-items li::before { margin-right: 12px; color: var(--olive-hover); content: "—"; }
+    @media (max-width: 1023px) { .home-line-section .eq-grid:not([data-pronto]) { min-height: calc(2 * (1.25 * ((100vw - 48px - clamp(20px, 3vw, 40px)) / 2) + 300px) + clamp(20px, 3vw, 40px) + 40px); } }
+    @media (max-width: 639px) {
+      .home-line-section .eq-grid:not([data-pronto]) { min-height: calc(3 * (1.25 * (100vw - 36px) + 300px) + 40px + 40px); }
+      .home-line-cta { padding-bottom: 64px; }
+      .home-line-cta .button { width: 100%; }
+    }

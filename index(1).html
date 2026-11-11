@@ -10,6 +10,9 @@
   <link rel="icon" href="assets/fort-domus-logo.png" type="image/png">
   <link rel="stylesheet" href="assets/site.css?v=clean-headings-20261102">
   <script defer src="assets/supabase-config.js"></script>
+  <script defer src="assets/products-data.js"></script>
+  <script defer src="assets/catalogo.js"></script>
+  <script defer src="assets/home-linha.js"></script>
   <script defer src="assets/site.js?v=mobile-qap-20261102"></script>
 </head>
 <body>
@@ -44,10 +47,6 @@
 
   <main id="conteudo">
     <section class="hero" id="inicio">
-      <video class="hero-background-video" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/fort-domus-produto.jpg" aria-hidden="true" tabindex="-1">
-        <source src="assets/fort-domus-hero.mp4" type="video/mp4">
-      </video>
-      <div class="hero-backdrop-shade" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
           <div class="hero-copy-content" data-reveal>
@@ -56,19 +55,18 @@
             <p>Disciplina começa na organização. Um espaço dedicado para manter seu equipamento pronto e no lugar certo.</p>
             <div class="hero-actions">
               <a class="button" href="https://wa.me/5583999018926?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Fort%20Domus%20e%20quero%20tirar%20uma%20d%C3%BAvida%20sobre%20os%20organizadores.%20Minha%20d%C3%BAvida%20%C3%A9%3A%20" target="_blank" rel="noopener noreferrer">TIRE SUA DÚVIDA! <span aria-hidden="true">↗</span></a>
-              <a class="button button-secondary" href="/produtos/organizador">Conheça o produto <span aria-hidden="true">↗</span></a>
+              <a class="button button-secondary" href="/equipamentos">Explorar equipamentos <span aria-hidden="true">↗</span></a>
             </div>
             <div class="hero-note">Organização para a rotina de quem protege</div>
           </div>
-          <button class="button button-secondary hero-video-play" type="button" hidden aria-hidden="true"><span class="hero-video-play-mobile-label">QAP</span><span class="hero-video-play-desktop-label">Reproduzir vídeo</span></button>
         </div>
 
         <div class="video-frame" data-reveal>
-          <img class="hero-video" src="assets/fort-domus-produto.jpg" alt="Organizador Tático com uniforme, colete, cinto, boné e coturnos" width="1300" height="1734" fetchpriority="high">
+          <picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 40vw, 90vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 90vw"><img class="hero-video" src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 90vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" fetchpriority="high" decoding="async"></picture><span class="ilus-badge ilus-badge--topo" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
           <div class="video-shade" aria-hidden="true"></div>
           <div class="video-status">
             <div>
-              <span class="eyebrow">Produto em destaque</span>
+              <span class="eyebrow">Linha Fort Domus</span>
               <strong>ORGANIZADORES TÁTICOS</strong>
             </div>
             <span class="status-tag">FORT DOMUS</span>
@@ -83,7 +81,7 @@
           <div class="craftsmanship-copy" data-reveal>
             <span class="eyebrow">Construção e materiais</span>
             <h2>Feito para durar.</h2>
-            <p>Muito mais que um organizador. Uma estrutura desenvolvida para acomodar seus equipamentos com resistência, praticidade e qualidade.</p>
+            <p>Muito mais que organizadores. Estruturas desenvolvidas para acomodar seus equipamentos com resistência, praticidade e qualidade.</p>
           </div>
         </div>
 
@@ -154,42 +152,19 @@
       </div>
     </section>
 
-    <section class="section gallery-section">
-      <div class="container home-product">
-        <figure class="home-product-photo" data-reveal>
-          <img src="assets/fort-domus-produto.jpg" alt="Organizador Tático com os equipamentos acomodados" width="1300" height="1734" loading="lazy">
-        </figure>
-        <div class="home-product-copy" data-reveal>
-          <span class="eyebrow">Produto em destaque</span>
-          <h2>Organizador Tático</h2>
-          <p>Conheça o organizador vertical desenvolvido para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço.</p>
-          <a class="button" href="/produtos#catalogo">Conhecer nossos produtos <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </section>
+    <section class="section home-line-section" id="equipamentos" aria-labelledby="home-line-title"><div class="container"><div class="section-heading" data-reveal><span class="eyebrow">Nossos equipamentos</span><h2 id="home-line-title">Escolha o organizador ideal para a sua rotina.</h2><p>Três modelos, cada um com base de aço ou base de madeira. Escolha a versão e veja o preço na hora.</p></div><div class="eq-grid" data-home-grid aria-label="Equipamentos Fort Domus"><noscript><p><a href="/produtos/organizador">Organizador Tático</a> · <a href="/produtos/organizador-cofre-simples">Organizador Tático com Cofre Simples</a> · <a href="/produtos/organizador-cofre-premium">Organizador Tático com Cofre Premium</a></p></noscript></div><div class="home-line-cta"><a class="button button-tactical" href="/equipamentos">Ver todos os equipamentos <span aria-hidden="true">↗</span></a></div></div></section>
 
-    <section class="investment-section product-price-section" aria-label="Preço e formas de pagamento do Organizador Tático">
+    <section class="investment-section product-price-section" aria-label="Preços dos equipamentos">
       <div class="container investment-panel product-price-panel" data-reveal>
         <div class="product-price-details">
           <span class="eyebrow">Condições de pagamento</span>
-          <div class="price">
-            <div class="price-cash">
-              <span class="price-label">NO PIX, DINHEIRO OU BOLETO</span>
-              <strong>R$ 599,90</strong>
-            </div>
-            <div class="price-card">
-              <span class="price-label">NO CARTÃO DE CRÉDITO</span>
-              <strong>5x de R$ 129,98</strong>
-              <span>sem juros</span>
-              <small>Total de R$ 649,90</small>
-            </div>
-          </div>
+          <div class="price price-from"><div class="price-cash"><strong data-min-pix>Veja os preços em Equipamentos</strong></div></div><ul class="pay-items" aria-label="Formas de pagamento e garantia"><li>Pix, dinheiro ou boleto</li><li>Cartão de crédito em até 5x sem juros</li><li>90 dias de garantia contra defeito de fabricação</li></ul>
           <div class="delivery-note">
             <p><strong>Entrega grátis em Campina Grande</strong></p>
             <p>Demais localidades: frete e prazo sob consulta pelo WhatsApp.</p>
           </div>
         </div>
-        <a class="button" href="https://wa.me/5583999018926?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20saber%20as%20formas%20de%20pagamento%20e%20o%20prazo%20de%20entrega%20do%20Organizador%20T%C3%A1tico.%20Minha%20cidade%20%C3%A9%3A%20" target="_blank" rel="noopener noreferrer">TIRE SUA DÚVIDA! <span aria-hidden="true">↗</span></a>
+        <a class="button" href="https://wa.me/5583999018926?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20saber%20as%20formas%20de%20pagamento%20e%20o%20prazo%20de%20entrega%20dos%20organizadores%20Fort%20Domus.%20Minha%20cidade%20%C3%A9%3A%20" target="_blank" rel="noopener noreferrer">TIRE SUA DÚVIDA! <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
@@ -326,7 +301,7 @@
         <summary>Sobre</summary>
         <div class="footer-links">
           <a href="/sobre-nos">Quem somos</a>
-          <a href="/produtos">Produtos</a>
+          <a href="/equipamentos">Equipamentos</a>
           <a href="/produtos/organizador">Organizador Tático</a>
           <span>Pagamento via Pix, dinheiro ou boleto e cartão de crédito</span>
         </div>
