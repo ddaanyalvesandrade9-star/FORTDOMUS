@@ -59,6 +59,7 @@ if (isLocalFile) {
   const localPages = new Map([
     ["/", "index.html"],
     ["/produtos", "produtos.html"],
+    ["/equipamentos", "equipamentos.html"],
     ["/produtos/organizador", "produto-organizador.html"],
     ["/duvidas", "duvidas.html"],
     ["/sobre-nos", "sobre-nos.html"],

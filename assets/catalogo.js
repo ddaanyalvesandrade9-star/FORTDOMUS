@@ -11,7 +11,7 @@
   const WIDTHS = [360, 540, 720, 1136];
   const PARAM = "versao";
   const STORE = "fd-versao:";
-  const SIZES_CARD = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
+  const SIZES_CARD = "(min-width: 1229px) 31vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
 
   /* ---------- Utilitários ---------- */
   function el(tag, className, text) {

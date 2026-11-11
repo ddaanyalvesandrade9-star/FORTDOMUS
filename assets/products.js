@@ -30,7 +30,7 @@
   document.querySelector('meta[name="description"]')?.setAttribute("content", product.summary);
 
   /* ---------- Foto (4:5) com aviso "Imagem ilustrativa" ---------- */
-  const media = C.mediaBox(version, { sizes: "(min-width: 900px) 48vw, 100vw", eager: true });
+  const media = C.mediaBox(version, { sizes: "(min-width: 1229px) 42vw, (min-width: 900px) 48vw, 100vw", eager: true });
   media.element.classList.add("pdp-media");
   const zoom = el("button", "pdp-zoom");
   zoom.type = "button";
