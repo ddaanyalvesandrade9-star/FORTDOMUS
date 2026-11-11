@@ -213,9 +213,10 @@
   /* ---------- WhatsApp: compra com mensagem pronta ---------- */
   function whatsappUrl(product, version) {
     const pagamento = hasCard(version)
-      ? `${brl(version.precoPix)} no Pix ou ${version.parcelas}x de ${brl(version.valorParcela)} no cartão`
+      ? `${brl(version.precoPix)} no Pix ou ${version.parcelas}x de ${brl(version.valorParcela)} sem juros no cartão`
       : `${brl(version.precoPix)} no Pix`;
-    const texto = `Olá! Quero o ${product.name}, versão ${version.label} (${pagamento}). Moro em ____. Qual o prazo de entrega?`;
+    // A cidade fica no fim: o cursor já para ali e o cliente só completa.
+    const texto = `Olá! Vim pelo site e quero comprar o ${product.name} – ${version.label}: ${pagamento}. Qual o prazo de entrega? Minha cidade é: `;
     return `${WHATSAPP}?text=${encodeURIComponent(texto)}`;
   }
 
