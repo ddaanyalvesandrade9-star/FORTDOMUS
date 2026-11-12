@@ -16,6 +16,8 @@
                   Sem fotos (ou arquivo ausente), o site mostra o espaço "Foto em produção".
     ilustrativa   true = mostra "Imagem ilustrativa" no card e na galeria. Troque para false ao usar foto real.
     descricaoCurta, destaques, specs   textos da versão (só o que foi confirmado)
+    lojaUrl       link https da Loja Online InfinitePay para esta versão. Preenchido: o botão vira "Comprar"
+                  e leva para a loja (frete pelo Melhor Envio lá). Vazio: continua "Comprar pelo WhatsApp".
     status        reservado (disponível / sob encomenda / em breve). Vazio: não é exibido.
 
   Para trocar uma imagem: salve o arquivo em assets/produtos/ com o nome indicado em "src", gere os tamanhos
@@ -49,9 +51,10 @@ window.FORT_DOMUS_PRODUCTS = [
         precoPix: 59990, precoCartao: 64990, parcelas: 5, valorParcela: 12998,
         fotos: [{ src: "assets/produtos/organizador-aco.png", alt: "Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos", width: 1136, height: 1408 }],
         ilustrativa: true,
-        descricaoCurta: "Bandeja superior em aço e prateleira inferior em grade de aço.",
-        destaques: ["Bandeja superior em aço", "Prateleira inferior em grade de aço"],
-        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em aço e prateleira inferior em grade de aço" }],
+        descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
+        destaques: ["Bandeja superior em madeira tratada com stain (proteção contra umidade)", "Prateleira inferior em grade de aço"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em madeira tratada com stain (proteção contra umidade) e prateleira inferior em grade de aço" }],
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/ppv1252-organizador-tatico", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
       {
@@ -62,13 +65,14 @@ window.FORT_DOMUS_PRODUCTS = [
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
         destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
         specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/ppv1252-organizador-tatico", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
     ],
   },
   {
     slug: "organizador-cofre-simples",
-    name: "Organizador Tático com Cofre Simples",
+    name: "Organizador Tático Cofre Senha",
     category: "Organização e segurança para a sua rotina",
     summary: "Organizador com cofre eletrônico compacto fixado no topo, para guardar documentos, dinheiro e objetos de valor.",
     defaultVersion: "aco",
@@ -96,28 +100,30 @@ window.FORT_DOMUS_PRODUCTS = [
       {
         id: "organizador-cofre-simples:aco", key: "aco", label: "Base de aço",
         precoPix: 99990, precoCartao: 109990, parcelas: 5, valorParcela: 21998,
-        fotos: [{ src: "assets/produtos/organizador-cofre-simples-aco.png", alt: "Organizador Tático com Cofre Simples e base de aço: cofre eletrônico de porta frontal, com teclado e chave, fixado na bandeja superior, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
+        fotos: [{ src: "assets/produtos/organizador-cofre-simples-aco.png", alt: "Organizador Tático Cofre Senha e base de aço: cofre eletrônico de porta frontal, com teclado e chave, fixado na bandeja superior, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
         ilustrativa: true,
-        descricaoCurta: "Bandeja superior em aço e prateleira inferior em grade de aço.",
-        destaques: ["Bandeja superior em aço", "Prateleira inferior em grade de aço"],
-        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em aço e prateleira inferior em grade de aço" }],
+        descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
+        destaques: ["Bandeja superior em madeira tratada com stain (proteção contra umidade)", "Prateleira inferior em grade de aço"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em madeira tratada com stain (proteção contra umidade) e prateleira inferior em grade de aço" }],
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/njg8682-organizador-tatico-cofre-senha", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
       {
         id: "organizador-cofre-simples:madeira", key: "madeira", label: "Base de madeira",
         precoPix: 94990, precoCartao: 104990, parcelas: 5, valorParcela: 20998,
-        fotos: [{ src: "assets/produtos/organizador-cofre-simples-madeira.png", alt: "Organizador Tático com Cofre Simples e base de madeira: cofre eletrônico de porta frontal, com teclado e chave, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
+        fotos: [{ src: "assets/produtos/organizador-cofre-simples-madeira.png", alt: "Organizador Tático Cofre Senha e base de madeira: cofre eletrônico de porta frontal, com teclado e chave, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
         destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
         specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/njg8682-organizador-tatico-cofre-senha", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
     ],
   },
   {
     slug: "organizador-cofre-premium",
-    name: "Organizador Tático com Cofre Premium",
+    name: "Organizador Tático Cofre Biométrico",
     category: "Organização e segurança para a sua rotina",
     summary: "Organizador com cofre eletrônico fixado no topo, com abertura por biometria, para guardar documentos, dinheiro e objetos de valor.",
     defaultVersion: "aco",
@@ -149,21 +155,23 @@ window.FORT_DOMUS_PRODUCTS = [
       {
         id: "organizador-cofre-premium:aco", key: "aco", label: "Base de aço",
         precoPix: 129990, precoCartao: 139990, parcelas: 5, valorParcela: 27998,
-        fotos: [{ src: "assets/produtos/organizador-cofre-premium-aco.png", alt: "Organizador Tático com Cofre Premium e base de aço: cofre baixo com tampa superior e leitor de impressão digital fixado no topo, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
+        fotos: [{ src: "assets/produtos/organizador-cofre-premium-aco.png", alt: "Organizador Tático Cofre Biométrico e base de aço: cofre baixo com tampa superior e leitor de impressão digital fixado no topo, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
         ilustrativa: true,
-        descricaoCurta: "Bandeja superior em aço e prateleira inferior em grade de aço.",
-        destaques: ["Bandeja superior em aço", "Prateleira inferior em grade de aço"],
-        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em aço e prateleira inferior em grade de aço" }],
+        descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
+        destaques: ["Bandeja superior em madeira tratada com stain (proteção contra umidade)", "Prateleira inferior em grade de aço"],
+        specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em madeira tratada com stain (proteção contra umidade) e prateleira inferior em grade de aço" }],
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/cqy6913-organizador-tatico-com-cofre", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
       {
         id: "organizador-cofre-premium:madeira", key: "madeira", label: "Base de madeira",
         precoPix: 124990, precoCartao: 134990, parcelas: 5, valorParcela: 26998,
-        fotos: [{ src: "assets/produtos/organizador-cofre-premium-madeira.png", alt: "Organizador Tático com Cofre Premium e base de madeira: cofre baixo com tampa aberta, teclado e leitor de impressão digital, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
+        fotos: [{ src: "assets/produtos/organizador-cofre-premium-madeira.png", alt: "Organizador Tático Cofre Biométrico e base de madeira: cofre baixo com tampa aberta, teclado e leitor de impressão digital, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
         destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
         specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/cqy6913-organizador-tatico-com-cofre", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
     ],

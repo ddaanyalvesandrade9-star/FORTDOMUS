@@ -79,12 +79,12 @@
   const priceSlot = el("div", "pi-price-slot");
   priceSlot.append(C.priceEl(version));
   const buy = el("a", "button pi-cta pi-buy", "Comprar pelo WhatsApp");
-  buy.href = C.whatsappUrl(product, version);
   buy.target = "_blank";
   buy.rel = "noopener noreferrer";
   const arrow = el("span", "", " ↗");
   arrow.setAttribute("aria-hidden", "true");
   buy.append(arrow);
+  C.syncBuy(buy, product, version);
   const sections = el("div", "pi-variant-sections");
   const renderSections = () => sections.replaceChildren(
     block("Principais características", list(highlights())),
@@ -98,7 +98,8 @@
     descSlot.textContent = version.descricaoCurta;
     priceSlot.replaceChildren(C.priceEl(version));
     renderSections();
-    buy.href = C.whatsappUrl(product, version);
+    C.syncBuy(buy, product, version);
+    C.syncDuvidaLinks(product, version);
     media.show(version);
     syncZoom();
     C.writeKey(product, version);
@@ -116,6 +117,7 @@
   const grid = el("div", "product-catalog-grid");
   grid.append(gallery, info);
   page.replaceChildren(back, grid);
+  C.syncDuvidaLinks(product, version);
   page.dataset.pronto = "";
 
   C.injectLd(C.productLd(product));

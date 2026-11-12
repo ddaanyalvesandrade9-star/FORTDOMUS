@@ -220,6 +220,50 @@
     return `${WHATSAPP}?text=${encodeURIComponent(texto)}`;
   }
 
+  /* ---------- Botão de compra: loja InfinitePay da versão, ou WhatsApp enquanto não houver link ----------
+     O link vem de "lojaUrl" em products-data.js. SEGURANÇA: só é aceito https, no host exato
+     loja.infinitepay.io, dentro da loja /fortdomus/, sem usuário/senha, porta ou fragmento.
+     Qualquer outro valor (ou vazio) mantém o botão antigo "Comprar pelo WhatsApp".
+     Se mudar a loja (InfiniteTag), atualize LOJA_HOST/LOJA_PATH e o teste tests/purchase-links.test.js. */
+  const LOJA_HOST = "loja.infinitepay.io";
+  const LOJA_PATH = "/fortdomus/";
+  function lojaUrlOf(version) {
+    const raw = typeof version.lojaUrl === "string" ? version.lojaUrl.trim() : "";
+    if (!raw) return "";
+    try {
+      const url = new URL(raw);
+      const ok = url.protocol === "https:" && url.hostname === LOJA_HOST && !url.port && !url.username && !url.password
+        && !url.hash && url.pathname.startsWith(LOJA_PATH) && url.pathname.length > LOJA_PATH.length;
+      return ok ? url.href : "";
+    } catch {
+      return "";
+    }
+  }
+
+  function syncBuy(buy, product, version) {
+    if (!buy) return;
+    const loja = lojaUrlOf(version);
+    buy.href = loja || whatsappUrl(product, version);
+    const label = loja ? "Comprar" : "Comprar pelo WhatsApp";
+    const textNode = [...buy.childNodes].find((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+    if (textNode) textNode.textContent = textNode.textContent.replace(textNode.textContent.trim(), label);
+    else buy.prepend(document.createTextNode(`${label} `));
+  }
+
+  /* Botões "TIRE SUA DÚVIDA" da página de produto: levam modelo, versão e preço no Pix,
+     para o atendimento saber de onde veio o contato e qual versão interessa mais. */
+  function whatsappDuvidaUrl(product, version) {
+    const texto = `Olá! Vim pelo site e tenho interesse no ${product.name} – ${version.label} (${brl(version.precoPix)} no Pix). Minha dúvida é: `;
+    return `${WHATSAPP}?text=${encodeURIComponent(texto)}`;
+  }
+
+  function syncDuvidaLinks(product, version) {
+    document.querySelectorAll('a[href^="https://wa.me/"]:not([data-buy])').forEach((link) => {
+      if (link.closest("footer") || !/d[uú]vida/i.test(link.textContent)) return;
+      link.href = whatsappDuvidaUrl(product, version);
+    });
+  }
+
   /* ---------- Card da vitrine ---------- */
   function buildCard(product, { eager = false, headingLevel = 2 } = {}) {
     let version = versionOf(product, product.defaultVersion);
@@ -299,7 +343,7 @@
 
   window.FortDomusCatalog = {
     products: PRODUCTS, brl, el, productBySlug, versionOf, hasCard, minPix, readKey, writeKey, productPath,
-    priceEl, swap, pictureEl, placeholderEl, photoOf, mediaBox, buildSelector, whatsappUrl, buildCard,
+    priceEl, swap, pictureEl, placeholderEl, photoOf, mediaBox, buildSelector, whatsappUrl, syncBuy, lojaUrlOf, whatsappDuvidaUrl, syncDuvidaLinks, buildCard,
     productLd, injectLd, ogImage, abs, SIZES_CARD,
   };
 })();

@@ -37,7 +37,8 @@
 
   function apply(initial) {
     if (priceSlot) priceSlot.replaceChildren(C.priceEl(version));
-    if (buy) buy.href = C.whatsappUrl(product, version);
+    C.syncBuy(buy, product, version);
+    C.syncDuvidaLinks(product, version);
     if (desc) desc.textContent = version.descricaoCurta;
     root.querySelectorAll("[data-somente-versao]").forEach((node) => { node.hidden = node.dataset.somenteVersao !== version.key; });
     if (panelEyebrow) panelEyebrow.textContent = `Condições de pagamento · ${version.label}`;
