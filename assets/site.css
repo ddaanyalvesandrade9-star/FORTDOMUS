@@ -1381,5 +1381,5 @@
     .footer-logo { display: block; width: min(252px, 100%); }
     .footer-logo img { width: 100%; }
 
-    /* Botão COMPRAR AGORA do topo: maior e mais visível (só desktop; no celular fica a barra de compra) */
-    .header-cta { min-height: 58px; padding: 0 38px; font-size: 1rem; font-weight: 800; letter-spacing: .1em; box-shadow: 0 0 0 1px var(--olive-hover); }
+    /* Botão COMPRAR AGORA do topo: um pouco maior que os demais, sem exagero (só desktop; no celular fica a barra de compra) */
+    .header-cta { min-height: 52px; padding: 0 26px; font-size: .82rem; font-weight: 800; letter-spacing: .09em; }
