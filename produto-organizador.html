@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>const base = document.createElement("base"); base.href = location.protocol === "file:" ? "./" : "/"; document.head.append(base);</script>
   <meta name="theme-color" content="#1a1a1a">
-  <meta name="description" content="Conheça o Organizador Tático: dimensões, materiais, galeria e condições para adquirir o seu.">
+  <meta name="description" content="Um organizador vertical para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço. Duas versões: base de aço ou base de madeira.">
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Organizador Tático | Fort Domus">
+  <meta property="og:description" content="Um organizador vertical para acomodar farda, colete, cinto, boné e coturno, aproveitando melhor o espaço. Duas versões: base de aço ou base de madeira.">
+  <meta property="og:url" content="https://fortdomus.vercel.app/produtos/organizador">
+  <meta property="og:image" content="https://fortdomus.vercel.app/assets/produtos/organizador-aco-og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Organizador Tático | Fort Domus</title>
   <link rel="canonical" href="https://fortdomus.vercel.app/produtos/organizador">
   <link rel="icon" href="assets/fort-domus-logo.png" type="image/png">
   <link rel="stylesheet" href="assets/site.css">
-  <script defer src="assets/supabase-config.js"></script>
+  <link rel="preload" as="image" type="image/avif" imagesrcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" imagesizes="(min-width: 1229px) 42vw, (min-width: 900px) 48vw, 100vw">
   <script defer src="assets/products-data.js"></script>
   <script defer src="assets/catalogo.js"></script>
   <script defer src="assets/products.js"></script>
-  <script defer src="assets/organizador-estatico.js"></script>
   <script defer src="assets/site.js"></script>
 </head>
 <body>
@@ -37,109 +42,18 @@
     </div>
   </header>
 
-  <main id="conteudo" data-organizador-estatico="organizador">
+  <main id="conteudo">
     <section class="container product-catalog" data-slug="organizador" data-product-page aria-label="Produto">
       <noscript><p class="product-missing">Ative o JavaScript para ver o catálogo deste produto ou <a href="/equipamentos">volte para a lista de equipamentos</a>.</p></noscript>
     </section>
 
-    <section class="section product-gallery" id="galeria">
+    <section class="section product-videos" data-product-videos hidden>
       <div class="container">
         <div class="section-heading" data-reveal>
-          <span class="eyebrow">Galeria do produto</span>
-          <h2>Conheça o organizador em detalhe.</h2>
-          <p>Os espaços indicam os enquadramentos previstos para as próximas fotografias reais do produto.</p>
+          <span class="eyebrow">Vídeos</span>
+          <h2>Veja o produto em detalhe.</h2>
         </div>
-        <div class="product-gallery-grid">
-          <figure class="gallery-item" data-gallery data-reveal data-versao-foto data-sizes="(min-width: 900px) 30vw, 100vw"><picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 30vw, 100vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 30vw, 100vw"><img src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 30vw, 100vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" loading="lazy" decoding="async"></picture><span class="ilus-badge" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
-            <figcaption class="photo-caption">Vista completa</figcaption>
-          </figure>
-          <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Vista lateral</strong><span>Espaço para fotografia real do produto</span></figure>
-          <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Vista traseira</strong><span>Espaço para fotografia real do produto</span></figure>
-          <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Detalhes da estrutura</strong><span>Espaço para fotografia real de detalhe</span></figure>
-          <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Detalhes dos ganchos</strong><span>Espaço para fotografia real de detalhe</span></figure>
-          <figure class="photo-slot" data-reveal data-somente-versao="madeira" hidden><span class="photo-icon" aria-hidden="true"></span><strong>Acabamento da madeira</strong><span>Espaço para fotografia real de detalhe</span></figure>
-          <figure class="photo-slot" data-reveal><span class="photo-icon" aria-hidden="true"></span><strong>Em ambiente real</strong><span>Espaço para fotografia real do produto</span></figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="section craftsmanship-section" id="qualidade">
-      <div class="container">
-        <div class="craftsmanship-intro">
-          <div class="craftsmanship-copy" data-reveal>
-            <span class="eyebrow">Construção e materiais</span>
-            <h2>Feito para durar.</h2>
-            <p>Muito mais que um organizador. Uma estrutura desenvolvida para acomodar seus equipamentos com resistência, praticidade e qualidade.</p>
-            <ul class="quality-list" aria-label="Qualidades do organizador">
-              <li><strong>Aço galvanizado</strong><span>Tubos de aço 20x20 mm e chapa de aço 18, com proteção contra corrosão e ferrugem.</span></li>
-              <li><strong>Pintura de qualidade</strong><span>Acabamento uniforme e uma camada adicional de proteção para a estrutura.</span></li>
-              <li data-somente-versao="madeira" hidden><strong>Madeira tratada</strong><span>Madeira com aplicação de stain para ajudar a proteger contra a umidade.</span></li>
-              <li><strong>Ganchos sob medida</strong><span>Encaixes desenvolvidos para acomodar cada equipamento sem improvisações.</span></li>
-            </ul>
-          </div>
-          <figure class="craftsmanship-photo" data-reveal data-versao-foto data-sizes="(min-width: 900px) 40vw, 100vw"><picture><source type="image/avif" srcset="assets/produtos/organizador-aco-360.avif 360w, assets/produtos/organizador-aco-540.avif 540w, assets/produtos/organizador-aco-720.avif 720w, assets/produtos/organizador-aco-1136.avif 1136w" sizes="(min-width: 900px) 40vw, 100vw"><source type="image/webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 100vw"><img src="assets/produtos/organizador-aco-720.webp" srcset="assets/produtos/organizador-aco-360.webp 360w, assets/produtos/organizador-aco-540.webp 540w, assets/produtos/organizador-aco-720.webp 720w, assets/produtos/organizador-aco-1136.webp 1136w" sizes="(min-width: 900px) 40vw, 100vw" alt="Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos" width="1136" height="1408" loading="lazy" decoding="async"></picture><span class="ilus-badge" data-ilus-id="organizador:aco">Imagem ilustrativa</span>
-            <figcaption>Organizador Tático · construção e detalhes</figcaption>
-          </figure>
-        </div>
-
-        <div class="material-grid">
-          <article class="material-card" data-reveal>
-            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe do aço galvanizado"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 12v40M29 12v40M17 20h12M17 44h12M38 16h10v32H38zM38 24h10M38 40h10"></path></svg><span>Foto real do aço em detalhe · em breve</span></div></figure>
-            <div class="material-card-copy"><h3>Aço galvanizado</h3><p>Toda a estrutura é fabricada em tubos de aço 20x20 mm e chapa de aço 18. O material galvanizado recebe uma camada de proteção de zinco, que ajuda a proteger o metal contra a corrosão e a ferrugem, aumentando sua durabilidade.</p></div>
-          </article>
-          <article class="material-card" data-reveal>
-            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe da pintura do organizador"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="m19 43 21-21 7 7-21 21-10 3zM36 26l7 7M43 13l1.5 4.5L49 19l-4.5 1.5L43 25l-1.5-4.5L37 19l4.5-1.5z"></path></svg><span>Foto real da pintura em detalhe · em breve</span></div></figure>
-            <div class="material-card-copy"><h3>Pintura de qualidade</h3><p>Acabamento cuidadosamente executado, que valoriza o visual do produto e proporciona uma camada adicional de proteção à estrutura metálica.</p></div>
-          </article>
-          <article class="material-card" data-reveal data-somente-versao="madeira" hidden>
-            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real de detalhe da madeira tratada"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M13 18h38v28H13zM18 25c7 5 15-5 28 1M18 34c8 5 15-4 28 1M18 41c8 4 15-3 28 1"></path></svg><span>Foto real da madeira em detalhe · em breve</span></div></figure>
-            <div class="material-card-copy"><h3>Madeira tratada</h3><p>Utilizamos madeira com aplicação de stain, um tratamento que ajuda a proteger a superfície contra a umidade e contribui para conservar sua aparência.</p></div>
-          </article>
-          <article class="material-card" data-reveal>
-            <figure class="material-photo" role="img" aria-label="Espaço reservado para fotografia real dos ganchos instalados no organizador"><div class="material-placeholder"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 15v20a8 8 0 0 0 16 0V22a7 7 0 0 1 14 0v5M41 27h14M49 22v10M41 32l8 13 8-13"></path></svg><span>Foto real dos ganchos em detalhe · em breve</span></div></figure>
-            <div class="material-card-copy"><h3>Ganchos sob medida</h3><p>Cada equipamento precisa ter seu espaço. Por isso, desenvolvemos ganchos sob medida para proporcionar encaixe adequado e facilitar a organização dos seus equipamentos, sem improvisações.</p></div>
-          </article>
-        </div>
-
-        <div class="craftsmanship-close" data-reveal>
-          <h3>Cada equipamento no seu devido lugar.</h3>
-          <p>Chega de deixar seus equipamentos espalhados, ocupando espaço ou sem um local adequado para acomodá-los.</p>
-          <p>Tenha tudo organizado, de fácil acesso e em uma estrutura desenvolvida para acompanhar sua rotina.</p>
-          <p class="brand-signoff">FORT DOMUS. Organização, resistência e cuidado em cada detalhe.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section newsletter-section lead-signup-section" aria-labelledby="lead-signup-title">
-      <div class="container lead-signup-inner">
-        <div class="lead-signup-copy" data-reveal>
-          <span class="eyebrow">Novidades Fort Domus</span>
-          <h2 id="lead-signup-title">Receba novidades da Fort Domus</h2>
-          <p>Cadastre seu contato para receber informações sobre disponibilidade, produtos e novidades diretamente pelo WhatsApp.</p>
-        </div>
-        <form class="lead-form" id="lead-form" data-consent-version="consent-v1" data-reveal novalidate>
-          <div class="lead-field">
-            <label for="lead-name">Nome completo</label>
-            <input id="lead-name" name="nome" type="text" autocomplete="name" maxlength="120" required aria-describedby="lead-name-error">
-            <small class="lead-field-error" id="lead-name-error"></small>
-          </div>
-          <div class="lead-field">
-            <label for="lead-whatsapp">Número de WhatsApp com DDD</label>
-            <input id="lead-whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(83) 99999-9999" maxlength="15" required aria-describedby="lead-whatsapp-error">
-            <small class="lead-field-error" id="lead-whatsapp-error"></small>
-          </div>
-          <label class="lead-consent" for="lead-consent">
-            <input id="lead-consent" name="autorizacao_contato" type="checkbox" required aria-describedby="lead-consent-error">
-            <span>Autorizo a Fort Domus a entrar em contato comigo pelo WhatsApp para enviar informações sobre produtos, disponibilidade e novidades. Sei que posso cancelar essa autorização a qualquer momento.</span>
-          </label>
-          <small class="lead-field-error" id="lead-consent-error"></small>
-          <div class="lead-hp" aria-hidden="true"><label for="lead-website">Não preencha este campo</label><input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-          <div class="lead-captcha" id="lead-captcha" aria-label="Verificação antirobô"></div>
-          <small class="lead-field-error" id="lead-captcha-error" aria-live="polite"></small>
-          <button class="button lead-submit" type="submit">Enviar cadastro</button>
-          <p class="lead-privacy-note">Ao se cadastrar, você declara que leu nossa <a href="/politica-de-privacidade">Política de Privacidade</a>.</p>
-          <p class="lead-feedback" id="lead-feedback" role="status" aria-live="polite"></p>
-        </form>
+        <div class="pv-grid" data-product-video-grid></div>
       </div>
     </section>
   </main>
