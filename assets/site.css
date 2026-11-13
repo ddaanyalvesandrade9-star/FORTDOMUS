@@ -1380,3 +1380,6 @@
     /* O link do logo encolhe ao tamanho da imagem (antes ocupava a linha toda e a imagem ficava à esquerda) */
     .footer-logo { display: block; width: min(252px, 100%); }
     .footer-logo img { width: 100%; }
+
+    /* Botão COMPRAR AGORA do topo: maior e mais visível (só desktop; no celular fica a barra de compra) */
+    .header-cta { min-height: 58px; padding: 0 38px; font-size: 1rem; font-weight: 800; letter-spacing: .1em; box-shadow: 0 0 0 1px var(--olive-hover); }
