@@ -161,7 +161,7 @@ window.FORT_DOMUS_PRODUCTS = [
         descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
         destaques: ["Bandeja superior em madeira tratada com stain (proteção contra umidade)", "Prateleira inferior em grade de aço"],
         specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em madeira tratada com stain (proteção contra umidade) e prateleira inferior em grade de aço" }],
-        lojaUrl: "", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/ymx0493-organizador-tatico-cofre-biometrico", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
       {
