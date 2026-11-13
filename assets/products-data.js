@@ -44,7 +44,7 @@ window.FORT_DOMUS_PRODUCTS = [
     ],
     uso: "Para farda, colete, cinto, boné, coturnos e acessórios.",
     garantia: "Garantia de 90 dias contra defeito de fabricação.",
-    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete e prazo sob consulta no WhatsApp.",
+    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete calculado pelo CEP na finalização da compra, antes do pagamento.",
     versions: [
       {
         id: "organizador:aco", key: "aco", label: "Base de aço",
@@ -95,7 +95,7 @@ window.FORT_DOMUS_PRODUCTS = [
     ],
     uso: "Cofre para guardar documentos, dinheiro e objetos de valor. Organizador para farda, colete, cinto, boné, coturnos e acessórios.",
     garantia: "Garantia de 90 dias contra defeito de fabricação.",
-    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete e prazo sob consulta no WhatsApp.",
+    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete calculado pelo CEP na finalização da compra, antes do pagamento.",
     versions: [
       {
         id: "organizador-cofre-simples:aco", key: "aco", label: "Base de aço",
@@ -150,7 +150,7 @@ window.FORT_DOMUS_PRODUCTS = [
     ],
     uso: "Cofre para guardar documentos, dinheiro e objetos de valor. Organizador para farda, colete, cinto, boné, coturnos e acessórios.",
     garantia: "Garantia de 90 dias contra defeito de fabricação.",
-    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete e prazo sob consulta no WhatsApp.",
+    entrega: "Entrega grátis em Campina Grande. Outras cidades: frete calculado pelo CEP na finalização da compra, antes do pagamento.",
     versions: [
       {
         id: "organizador-cofre-premium:aco", key: "aco", label: "Base de aço",
