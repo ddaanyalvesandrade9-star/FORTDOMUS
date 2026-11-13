@@ -1377,3 +1377,6 @@
     /* Rodapé: logo, slogan e redes sociais centralizados no mesmo eixo */
     .footer-brand { align-items: center; text-align: center; }
     .footer-socials { justify-content: center; }
+    /* O link do logo encolhe ao tamanho da imagem (antes ocupava a linha toda e a imagem ficava à esquerda) */
+    .footer-logo { display: block; width: min(252px, 100%); }
+    .footer-logo img { width: 100%; }
