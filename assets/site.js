@@ -517,3 +517,17 @@ if ("IntersectionObserver" in window && !prefersReducedMotion) {
   revealElements.forEach((element) => element.classList.add("is-visible"));
   document.querySelectorAll("[data-reveal]").forEach((element) => element.classList.add("is-visible"));
 }
+
+/* Botão flutuante "Tire suas dúvidas · Fale com nosso time" (WhatsApp). Nas páginas de produto,
+   assets/catalogo.js troca a mensagem pela do modelo e da versão escolhidos (syncDuvidaLinks). */
+(() => {
+  const message = "Olá! Vim pelo site da Fort Domus e quero tirar uma dúvida sobre os organizadores. Minha dúvida é: ";
+  const link = document.createElement("a");
+  link.className = "wa-float";
+  link.href = "https://wa.me/5583999018926?text=" + encodeURIComponent(message);
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.setAttribute("aria-label", "Tire suas dúvidas: fale com a Fort Domus pelo WhatsApp");
+  link.innerHTML = '<span class="wa-float-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"></path><path d="M9 8.5c0 3.6 2.9 6.5 6.5 6.5l1-1.8-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2z"></path></svg></span><span class="wa-float-text"><small>Tire suas dúvidas</small><strong>Fale com nosso time</strong></span>';
+  document.body.append(link);
+})();

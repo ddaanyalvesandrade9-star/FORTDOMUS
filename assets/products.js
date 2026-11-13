@@ -227,6 +227,8 @@
   syncZoom();
   paintThumbs();
   C.syncDuvidaLinks(product, version);
+  // site.js (carregado depois) cria o botão flutuante de WhatsApp: sincroniza de novo quando a página termina de carregar
+  document.addEventListener("DOMContentLoaded", () => C.syncDuvidaLinks(product, version));
   page.dataset.pronto = "";
   document.dispatchEvent(new CustomEvent("fd:versao", { detail: { product, version } }));
 
