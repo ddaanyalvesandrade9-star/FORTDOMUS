@@ -288,7 +288,8 @@
     .value-strip:hover .value-track { animation-play-state: paused; }
     @keyframes value-marquee { to { transform: translateX(-50%); } }
     .value-item { display: flex; min-width: clamp(190px, 22vw, 260px); min-height: 88px; align-items: center; justify-content: center; gap: 12px; padding: 18px; color: var(--silver); font: 600 .74rem "Courier New", monospace; letter-spacing: .1em; text-align: center; text-transform: uppercase; white-space: nowrap; }
-    .value-item + .value-item { border-left: 1px solid var(--border); }
+    /* todo item tem a barra à esquerda, inclusive o primeiro de cada grupo (emenda do loop da faixa) */
+    .value-item { border-left: 1px solid var(--border); }
     .value-item::before { width: 6px; height: 6px; background: var(--olive-hover); content: ""; transform: rotate(45deg); }
 
     .product-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, .82fr); align-items: center; gap: clamp(40px, 8vw, 104px); }
