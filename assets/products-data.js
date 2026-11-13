@@ -66,7 +66,7 @@ window.FORT_DOMUS_PRODUCTS = [
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
         destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
         specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
-        lojaUrl: "https://loja.infinitepay.io/fortdomus/ppv1252-organizador-tatico", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/rqy1187-organizador-tatico", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
     ],
@@ -117,7 +117,7 @@ window.FORT_DOMUS_PRODUCTS = [
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
         destaques: ["Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade)", "Estrutura metálica preta"],
         specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior e prateleira inferior em madeira tratada com stain (proteção contra umidade), sobre estrutura metálica preta" }],
-        lojaUrl: "https://loja.infinitepay.io/fortdomus/njg8682-organizador-tatico-cofre-senha", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
+        lojaUrl: "https://loja.infinitepay.io/fortdomus/vvv4494-organizador-tatico-cofre-senha-copia", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
     ],
@@ -161,7 +161,7 @@ window.FORT_DOMUS_PRODUCTS = [
         descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
         destaques: ["Bandeja superior em madeira tratada com stain (proteção contra umidade)", "Prateleira inferior em grade de aço"],
         specs: [{ label: "Bandeja e prateleira", value: "Bandeja superior em madeira tratada com stain (proteção contra umidade) e prateleira inferior em grade de aço" }],
-        lojaUrl: "https://loja.infinitepay.io/fortdomus/cqy6913-organizador-tatico-com-cofre", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
+        lojaUrl: "", // link do produto desta versão na Loja Online da InfinitePay (vazio = botão do WhatsApp)
         status: "",
       },
       {

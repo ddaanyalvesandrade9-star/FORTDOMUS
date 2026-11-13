@@ -10,7 +10,10 @@ const path = require("node:path");
 const ROOT = path.join(__dirname, "..");
 const APPROVED_STORE_LINKS = new Set([
   "https://loja.infinitepay.io/fortdomus/ppv1252-organizador-tatico",
+  "https://loja.infinitepay.io/fortdomus/rqy1187-organizador-tatico",
   "https://loja.infinitepay.io/fortdomus/njg8682-organizador-tatico-cofre-senha",
+  "https://loja.infinitepay.io/fortdomus/vvv4494-organizador-tatico-cofre-senha-copia",
+  "https://loja.infinitepay.io/fortdomus/ymx0493-organizador-tatico-cofre-biometrico",
   "https://loja.infinitepay.io/fortdomus/cqy6913-organizador-tatico-com-cofre",
 ]);
 const APPROVED_WHATSAPP = "5583999018926";
@@ -25,7 +28,8 @@ const FILES = PUBLISHED.filter((file) => !IGNORED.test(file));
 test("lojaUrl de cada versão é um dos 3 links aprovados", () => {
   const source = fs.readFileSync(path.join(ROOT, "assets", "products-data.js"), "utf8");
   const urls = [...source.matchAll(/lojaUrl:\s*"([^"]*)"/g)].map((m) => m[1]).filter(Boolean);
-  assert.equal(urls.length, 6, "esperado 6 versões com link");
+  // 5 ou 6: a versão Biométrico/aço pode ficar sem link (botão cai no WhatsApp) até a loja ter estoque.
+  assert.ok(urls.length >= 5 && urls.length <= 6, "esperado 5 ou 6 versões com link");
   for (const url of urls) assert.ok(APPROVED_STORE_LINKS.has(url), `link não aprovado: ${url}`);
 });
 
