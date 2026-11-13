@@ -60,7 +60,7 @@ window.FORT_DOMUS_PRODUCTS = [
       },
       {
         id: "organizador:madeira", key: "madeira", label: "Base de madeira",
-        precoPix: 54990, precoCartao: 59772, parcelas: 5, valorParcela: 11954,
+        precoPix: 54990, precoCartao: 59771, parcelas: 5, valorParcela: 11954,
         fotos: [{ src: "assets/produtos/organizador-madeira.png", alt: "Organizador Tático com base de madeira: bandeja superior e prateleira inferior em madeira clara sobre estrutura metálica preta, com farda, colete, cinto, boné e coturnos", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
