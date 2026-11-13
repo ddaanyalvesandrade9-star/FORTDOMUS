@@ -1373,3 +1373,7 @@
       .pdp-sticky .pdp-sticky-buy { width: auto; margin: 0; padding-inline: 26px; }
     }
     @media (max-width: 820px) { body:has(.pdp-sticky) .site-footer { padding-bottom: 88px; } }
+
+    /* Rodapé: logo, slogan e redes sociais centralizados no mesmo eixo */
+    .footer-brand { align-items: center; text-align: center; }
+    .footer-socials { justify-content: center; }
