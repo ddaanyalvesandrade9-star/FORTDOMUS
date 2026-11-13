@@ -7,7 +7,7 @@
   Cada versão é uma variação independente, com:
     id            identificador estável "<slug do produto>:<chave da versão>"
     key / label   chave usada na URL (?versao=aco | ?versao=madeira) e nome exibido
-    precoPix      preço no Pix, em CENTAVOS
+    precoPix      preço no Pix, em CENTAVOS = precoCartao com 8% de desconto (o desconto é configurado na InfinitePay)
     precoCartao   preço no cartão, em CENTAVOS (null = não exibir)
     parcelas      número de parcelas sem juros (5)
     valorParcela  valor de cada parcela, em CENTAVOS (parcelas x valorParcela = precoCartao)
@@ -40,6 +40,7 @@ window.FORT_DOMUS_PRODUCTS = [
       { label: "Estrutura", value: "Tubo de aço galvanizado 20×20 mm e chapa de aço 18" },
       { label: "Pintura", value: "Pintura de alta qualidade" },
       { label: "Ganchos", value: "Ganchos sob medida" },
+      { label: "Altura", value: "≈ 105 cm" },
       { label: "Base", value: "45 × 45 cm" },
     ],
     uso: "Para farda, colete, cinto, boné, coturnos e acessórios.",
@@ -48,7 +49,7 @@ window.FORT_DOMUS_PRODUCTS = [
     versions: [
       {
         id: "organizador:aco", key: "aco", label: "Base de aço",
-        precoPix: 59990, precoCartao: 64990, parcelas: 5, valorParcela: 12998,
+        precoPix: 59791, precoCartao: 64990, parcelas: 5, valorParcela: 12998,
         fotos: [{ src: "assets/produtos/organizador-aco.png", alt: "Organizador Tático com base de aço: bandeja superior preta e prateleira inferior em grade de aço, com farda, colete, cinto, boné e coturnos", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
@@ -59,7 +60,7 @@ window.FORT_DOMUS_PRODUCTS = [
       },
       {
         id: "organizador:madeira", key: "madeira", label: "Base de madeira",
-        precoPix: 54990, precoCartao: 59990, parcelas: 5, valorParcela: 11998,
+        precoPix: 55191, precoCartao: 59990, parcelas: 5, valorParcela: 11998,
         fotos: [{ src: "assets/produtos/organizador-madeira.png", alt: "Organizador Tático com base de madeira: bandeja superior e prateleira inferior em madeira clara sobre estrutura metálica preta, com farda, colete, cinto, boné e coturnos", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
@@ -99,7 +100,7 @@ window.FORT_DOMUS_PRODUCTS = [
     versions: [
       {
         id: "organizador-cofre-simples:aco", key: "aco", label: "Base de aço",
-        precoPix: 99990, precoCartao: 109990, parcelas: 5, valorParcela: 21998,
+        precoPix: 101191, precoCartao: 109990, parcelas: 5, valorParcela: 21998,
         fotos: [{ src: "assets/produtos/organizador-cofre-simples-aco.png", alt: "Organizador Tático Cofre Senha e base de aço: cofre eletrônico de porta frontal, com teclado e chave, fixado na bandeja superior, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
@@ -110,7 +111,7 @@ window.FORT_DOMUS_PRODUCTS = [
       },
       {
         id: "organizador-cofre-simples:madeira", key: "madeira", label: "Base de madeira",
-        precoPix: 94990, precoCartao: 104990, parcelas: 5, valorParcela: 20998,
+        precoPix: 96591, precoCartao: 104990, parcelas: 5, valorParcela: 20998,
         fotos: [{ src: "assets/produtos/organizador-cofre-simples-madeira.png", alt: "Organizador Tático Cofre Senha e base de madeira: cofre eletrônico de porta frontal, com teclado e chave, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",
@@ -154,7 +155,7 @@ window.FORT_DOMUS_PRODUCTS = [
     versions: [
       {
         id: "organizador-cofre-premium:aco", key: "aco", label: "Base de aço",
-        precoPix: 129990, precoCartao: 139990, parcelas: 5, valorParcela: 27998,
+        precoPix: 128791, precoCartao: 139990, parcelas: 5, valorParcela: 27998,
         fotos: [{ src: "assets/produtos/organizador-cofre-premium-aco.png", alt: "Organizador Tático Cofre Biométrico e base de aço: cofre baixo com tampa superior e leitor de impressão digital fixado no topo, e prateleira inferior em grade de aço", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior em madeira tratada com stain e prateleira inferior em grade de aço.",
@@ -165,7 +166,7 @@ window.FORT_DOMUS_PRODUCTS = [
       },
       {
         id: "organizador-cofre-premium:madeira", key: "madeira", label: "Base de madeira",
-        precoPix: 124990, precoCartao: 134990, parcelas: 5, valorParcela: 26998,
+        precoPix: 124191, precoCartao: 134990, parcelas: 5, valorParcela: 26998,
         fotos: [{ src: "assets/produtos/organizador-cofre-premium-madeira.png", alt: "Organizador Tático Cofre Biométrico e base de madeira: cofre baixo com tampa aberta, teclado e leitor de impressão digital, sobre bandeja de madeira clara, e prateleira inferior de madeira sobre estrutura metálica preta", width: 1136, height: 1408 }],
         ilustrativa: true,
         descricaoCurta: "Bandeja superior e prateleira inferior em madeira tratada com stain, sobre estrutura metálica preta.",

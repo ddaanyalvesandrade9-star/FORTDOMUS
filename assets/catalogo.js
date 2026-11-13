@@ -70,11 +70,22 @@
   function priceEl(version) {
     const box = el("div", "fd-price");
     if (hasCard(version)) {
-      box.append(el("p", "fd-price-card", `${brl(version.precoCartao)} no cartão · ${version.parcelas}x de ${brl(version.valorParcela)} sem juros`));
+      box.append(
+        el("p", "fd-price-main", brl(version.precoCartao)),
+        el("p", "fd-price-parc", `em até ${version.parcelas}x de ${brl(version.valorParcela)} sem juros`),
+      );
+      const economia = version.precoCartao - version.precoPix;
+      const pct = Math.round((economia / version.precoCartao) * 100);
+      if (economia > 0) {
+        const pix = el("p", "fd-price-pix");
+        pix.append(el("strong", "", `PAGAMENTO NO PIX: ${pct}% OFF`), el("span", "", ` (economize ${brl(economia)})`));
+        box.append(pix);
+      }
+    } else {
+      const pix = el("p", "fd-price-pix");
+      pix.append(el("strong", "", brl(version.precoPix)), el("span", "", " no Pix"));
+      box.append(pix);
     }
-    const pix = el("p", "fd-price-pix");
-    pix.append(el("strong", "", brl(version.precoPix)), el("span", "", "no Pix"));
-    box.append(pix);
     return box;
   }
 
@@ -312,7 +323,7 @@
       offers: product.versions.map((version) => ({
         "@type": "Offer",
         name: `${product.name} · ${version.label}`,
-        price: (version.precoPix / 100).toFixed(2),
+        price: ((hasCard(version) ? version.precoCartao : version.precoPix) / 100).toFixed(2),
         priceCurrency: "BRL",
         url: abs(productPath(product, version)),
       })),
