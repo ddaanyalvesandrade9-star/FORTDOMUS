@@ -71,8 +71,8 @@
     const box = el("div", "fd-price");
     if (hasCard(version)) {
       box.append(
-        el("p", "fd-price-main", brl(version.precoCartao)),
-        el("p", "fd-price-parc", `em até ${version.parcelas}x de ${brl(version.valorParcela)} sem juros`),
+        el("p", "fd-price-main", `${version.parcelas}x de ${brl(version.valorParcela)}`),
+        el("p", "fd-price-parc", `sem juros · total de ${brl(version.precoCartao)} no cartão`),
       );
       const economia = version.precoCartao - version.precoPix;
       const pct = Math.round((economia / version.precoCartao) * 100);
