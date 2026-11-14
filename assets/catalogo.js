@@ -67,12 +67,14 @@
 
   /* ---------- Preço (regra legal) ----------
      Cartão: acima, menor, cinza, SEM risco, com parcelamento. Pix: grande, negrito, "no Pix". */
-  function priceEl(version) {
+  // parcelaEmDestaque: só os cartões da lista de equipamentos usam "5x de R$ X" em destaque;
+  // as páginas de produto mantêm o total no cartão em cima e o parcelamento abaixo.
+  function priceEl(version, { parcelaEmDestaque = false } = {}) {
     const box = el("div", "fd-price");
     if (hasCard(version)) {
       box.append(
-        el("p", "fd-price-main", `${version.parcelas}x de ${brl(version.valorParcela)}`),
-        el("p", "fd-price-parc", `sem juros · total de ${brl(version.precoCartao)} no cartão`),
+        el("p", "fd-price-main", parcelaEmDestaque ? `${version.parcelas}x de ${brl(version.valorParcela)}` : brl(version.precoCartao)),
+        el("p", "fd-price-parc", parcelaEmDestaque ? `sem juros · total de ${brl(version.precoCartao)} no cartão` : `em até ${version.parcelas}x de ${brl(version.valorParcela)} sem juros`),
       );
       const economia = version.precoCartao - version.precoPix;
       const pct = Math.round((economia / version.precoCartao) * 100);
@@ -288,14 +290,14 @@
     link.href = productPath(product, version, true);
     title.append(link);
     const priceSlot = el("div", "eq-price-slot");
-    priceSlot.append(priceEl(version));
+    priceSlot.append(priceEl(version, { parcelaEmDestaque: true }));
     const cta = el("p", "eq-cta");
     cta.append(el("span", "", "Ver produto"), el("span", "eq-cta-arrow", "→"));
     cta.querySelector(".eq-cta-arrow").setAttribute("aria-hidden", "true");
 
     const selector = buildSelector(product, version.key, (next) => {
       version = next;
-      priceSlot.replaceChildren(priceEl(version));
+      priceSlot.replaceChildren(priceEl(version, { parcelaEmDestaque: true }));
       swap(priceSlot);
       media.show(version);
       link.href = productPath(product, version, true);
